@@ -4,31 +4,33 @@ require "socket"
 b = [
   {"async-graphql", "./target/release/async-graphql", nil},
   {"gqlgen", "./main", nil},
+  {"graphene", "gunicorn", ["--log-level", "warning", "-w", System.cpu_count.to_s, "-b", "127.0.0.1:8000", "app:app"]},
   {"graphql-crystal", "./main", nil},
   {"graphql-jit", "node", ["index.js"]},
   {"graphql-js", "node", ["index.js"]},
   {"graphql-yoga", "node", ["--no-warnings", "index.js"]},
-  {"hotchocolate", "dotnet", ["run", "-v", "quiet"]},
+  {"hotchocolate", "dotnet", ["run", "-v", "quiet", "--nologo"]},
   # No usable version of libssl was found
   # {"hotchocolate", "./bin/release/net6.0/linux-x64/publish/hotchocolatebench"}
   {"juniper", "./target/release/juniper", nil},
 ]
 
 ch = Channel(Nil).new
-
 b.each do |b|
   spawn do
     dir = Path[Dir.current, b[0]]
+
     run("shards", ["install", "-q", "--frozen"], dir).wait if File.exists? dir.join("shard.yml")
     run("crystal", ["build", "--release", "-D", "preview_mt", "main.cr"], dir).wait if File.exists? dir.join("shard.yml")
     run("npm", ["ci", "--silent"], dir).wait if File.exists? dir.join("package.json")
     run("cargo", ["build", "--release", "--quiet"], dir).wait if File.exists? dir.join("Cargo.toml")
     run("go", ["build", "-o", "main", "main.go"], dir).wait if File.exists? dir.join("go.mod")
-    run("dotnet", ["publish", "-c", "release", "-r", "linux-x64", "--sc", "-v", "quiet"]).wait if File.exists? dir.join("appsettings.json")
+    run("dotnet", ["publish", "-c", "release", "-r", "linux-x64", "--sc", "-v", "quiet", "--nologo"], dir).wait if File.exists? dir.join("appsettings.json")
+    run("pip", ["install", "-q", "-r", "requirements.txt"], dir).wait if File.exists? dir.join("requirements.txt")
+
     ch.send(nil)
   end
 end
-
 b.each { |b| ch.receive }
 
 b.each do |b|
@@ -41,13 +43,12 @@ b.each do |b|
   while !port_open?
     sleep 1
   end
-  if !system("wrk -t#{System.cpu_count} -c#{System.cpu_count * 50} -d30s --timeout 10s --script=post.lua --latency http://127.0.0.1:8000/graphql")
+  if !system("wrk -t#{System.cpu_count} -c#{System.cpu_count * 50} -d10s --script=post.lua --latency http://127.0.0.1:8000/graphql")
     raise "fail"
   end
   p.terminate
   r = p.wait
   raise "failed with exit code #{r.exit_code}" if r.exit_code != 0
-  sleep 2
 end
 
 def run(cmd, args = nil, dir = nil)

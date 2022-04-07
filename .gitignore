@@ -4,3 +4,4 @@ bin
 main
 target
 obj
+__pycache__
