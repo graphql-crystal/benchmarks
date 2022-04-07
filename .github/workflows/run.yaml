@@ -14,5 +14,5 @@ jobs:
     - uses: cachix/install-nix-action@v17
       with:
         nix_path: nixpkgs=channel:nixos-unstable
-    - run: nix-env -f '<nixpkgs>' -iA wrk rustc cargo go nodejs nodePackages.npm
+    - run: nix-env -f '<nixpkgs>' -iA wrk rustc cargo go nodejs nodePackages.npm dotnet-sdk
     - run: crystal run.cr

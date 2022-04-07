@@ -8,6 +8,9 @@ b = [
   {"graphql-jit", "node", ["index.js"]},
   {"graphql-js", "node", ["index.js"]},
   {"graphql-yoga", "node", ["--no-warnings", "index.js"]},
+  {"hotchocolate", "dotnet", ["run", "-v", "quiet"]},
+  # No usable version of libssl was found
+  # {"hotchocolate", "./bin/release/net6.0/linux-x64/publish/hotchocolatebench"}
   {"juniper", "./target/release/juniper", nil},
 ]
 
@@ -21,6 +24,7 @@ b.each do |b|
     run("npm", ["ci", "--silent"], dir).wait if File.exists? dir.join("package.json")
     run("cargo", ["build", "--release", "--quiet"], dir).wait if File.exists? dir.join("Cargo.toml")
     run("go", ["build", "-o", "main", "main.go"], dir).wait if File.exists? dir.join("go.mod")
+    run("dotnet", ["publish", "-c", "release", "-r", "linux-x64", "--sc", "-v", "quiet"])
     ch.send(nil)
   end
 end
