@@ -1,0 +1,16 @@
+name: Run benchmarks
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: cachix/install-nix-action@17
+      with:
+        nix_path: nixpkgs=channel:nixos-unstable
+    - run: nix-env -iA nixpkgs.wrk nixpkgs.rustc nixpkgs.cargo nixpkgs.go nixpkgs.nodejs nixpkgs.nodePackages.npm
+    - run: crystal run.cr

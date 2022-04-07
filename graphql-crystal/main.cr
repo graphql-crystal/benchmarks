@@ -27,7 +27,7 @@ end
 logging false
 gzip false
 Kemal.config.powered_by_header = false
-Kemal.config.port = 8080
+Kemal.config.port = 8000
 
 Signal::TERM.trap do
   Kemal.stop

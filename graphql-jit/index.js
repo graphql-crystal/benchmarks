@@ -1,22 +1,33 @@
+const cluster = require("cluster");
+const {cpus} = require("os");
 const { createServer } = require("http");
 const { parse } = require("graphql");
 const { compileQuery } = require("graphql-jit");
 const { createSchema } = require("./schema");
 
-const schema = createSchema();
+const numCPUs = cpus().length;
 
-const server = createServer((req, res) => {
-  let payload = "";
+if (cluster.isPrimary) {
+  for (let i = 0; i < numCPUs; i++) {
+    cluster.fork();
+  }
+} else {
+  const schema = createSchema();
 
-  req.on("data", (chunk) => {
-    payload += chunk.toString();
+  const server = createServer((req, res) => {
+    let payload = "";
+
+    req.on("data", (chunk) => {
+      payload += chunk.toString();
+    });
+
+    req.on("end", async () => {
+      const { query } = JSON.parse(payload);
+      const result = await compileQuery(schema, parse(query)).query();
+      res.end(JSON.stringify(result));
+    });
   });
 
-  req.on("end", async () => {
-    const { query } = JSON.parse(payload);
-    const result = await compileQuery(schema, parse(query)).query();
-    res.end(JSON.stringify(result));
-  });
-});
+  server.listen(8000);
 
-server.listen(8080);
+}
