@@ -29,4 +29,9 @@ gzip false
 Kemal.config.powered_by_header = false
 Kemal.config.port = 8080
 
+Signal::TERM.trap do
+  Kemal.stop
+  exit
+end
+
 Kemal.run

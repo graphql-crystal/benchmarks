@@ -2,9 +2,8 @@
 require "socket"
 
 b = [
-  {"graphql-crystal", "crystal run --release -D preview_mt main.cr"},
-  {"graphql-crystal", "crystal run --release -D preview_mt main.cr"},
-  #{"graphql-jit", "npm ci --silent && npm run start --silent"}
+  {"graphql-crystal", "./main", nil},
+  {"graphql-jit", "node", ["index.js"]},
 ]
 
 ch = Channel(Nil).new
@@ -12,8 +11,9 @@ ch = Channel(Nil).new
 b.each do |b|
   spawn do
     dir = Path[Dir.current, b[0]]
-    run("shards install -q --frozen", dir) if File.exists? dir.join("shard.yml")
-    run("npm ci --silent", dir) if File.exists? dir.join("package.json")
+    run("shards", "install -q --frozen".split(" "), dir).wait if File.exists? dir.join("shard.yml")
+    run("crystal", "build --release -D preview_mt main.cr".split(" "), dir).wait if File.exists? dir.join("shard.yml")
+    run("npm", ["ci", "--silent"], dir).wait if File.exists? dir.join("package.json")
     ch.send(nil)
   end
 end
@@ -24,8 +24,9 @@ b.each do |b|
   if port_open?
     raise "port 8080 already in use"
   end
+  puts "--- #{b[0]}"
   dir = Path[Dir.current, b[0]]
-  p = run(b[1], dir)
+  p = run(b[1], b[2], dir)
   while !port_open?
     sleep 1
   end
@@ -33,14 +34,14 @@ b.each do |b|
     raise "fail"
   end
   p.terminate
-  #p.signal(Signal::KILL)
   r = p.wait
   raise "failed with exit code #{r.exit_code}" if r.exit_code != 0
-  #sleep 1
+  puts "\n"
+  sleep 2
 end
 
-def run(cmd, dir)
-  Process.new(cmd, shell: true, input: Process::Redirect::Inherit, output: Process::Redirect::Inherit, error: Process::Redirect::Inherit, chdir: dir.to_s)
+def run(cmd, args = nil, dir = nil)
+  Process.new(cmd, shell: false, args: args, input: Process::Redirect::Inherit, output: Process::Redirect::Inherit, error: Process::Redirect::Inherit, chdir: dir.to_s)
 end
 
 def port_open?
