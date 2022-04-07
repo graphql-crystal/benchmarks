@@ -1,7 +1,7 @@
 import cluster from 'cluster';
 import {cpus} from 'os';
 import express from 'express';
-import {graphqlHTTP} from 'express-graphql';
+import { getGraphQLParameters, processRequest, sendResult } from "graphql-helix";
 import {
   GraphQLSchema,
   GraphQLObjectType,
@@ -15,7 +15,7 @@ if (cluster.isPrimary) {
 } else {
   var schema = new GraphQLSchema({
     query: new GraphQLObjectType({
-      name: 'RootQueryType',
+      name: 'Query',
       fields: {
         hello: {
           type: GraphQLString,
@@ -28,9 +28,28 @@ if (cluster.isPrimary) {
   });
 
   var app = express();
-  app.use('/graphql', graphqlHTTP({
-    schema: schema,
-  }));
+  app.use(express.json());
+
+  app.use("/graphql", async (req, res) => {
+    const request = {
+      body: req.body,
+      headers: req.headers,
+      method: req.method,
+      query: req.query,
+    };
+
+    const { operationName, query, variables } = getGraphQLParameters(request);
+
+    const result = await processRequest({
+      operationName,
+      query,
+      variables,
+      request,
+      schema,
+    });
+
+    sendResult(result, res);
+  });
 
   app.listen(8000);
 }
