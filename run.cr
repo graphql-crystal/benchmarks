@@ -24,7 +24,7 @@ b.each do |b|
     run("npm", ["ci", "--silent"], dir).wait if File.exists? dir.join("package.json")
     run("cargo", ["build", "--release", "--quiet"], dir).wait if File.exists? dir.join("Cargo.toml")
     run("go", ["build", "-o", "main", "main.go"], dir).wait if File.exists? dir.join("go.mod")
-    run("dotnet", ["publish", "-c", "release", "-r", "linux-x64", "--sc", "-v", "quiet"])
+    run("dotnet", ["publish", "-c", "release", "-r", "linux-x64", "--sc", "-v", "quiet"]).wait if File.exists? dir.join("appsettings.json")
     ch.send(nil)
   end
 end
