@@ -7,6 +7,7 @@ b = [
   {"graphql-crystal", "./main", nil},
   {"graphql-jit", "node", ["index.js"]},
   {"graphql-js", "node", ["index.js"]},
+  {"graphql-yoga", "node", ["index.js"]},
   {"juniper", "./target/release/juniper", nil},
 ]
 
