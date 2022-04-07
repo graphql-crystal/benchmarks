@@ -21,7 +21,8 @@ if (cluster.isPrimary) {
           hello: () => 'world'
         }
       }
-    }
+    },
+    logging: false,
   })
 
   server.start()
