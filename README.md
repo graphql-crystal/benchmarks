@@ -1,4 +1,4 @@
-# GraphQL Benchmarks
+# GraphQL server benchmarks
 
 Benchmarks of the following GraphQL implementations:
 
@@ -7,7 +7,7 @@ Benchmarks of the following GraphQL implementations:
 * JavaScript: [graphql-jit](https://github.com/zalando-incubator/graphql-jit), [graphql-js](https://github.com/graphql/graphql-js), [graphql-yoga](https://github.com/dotansimha/graphql-yoga)
 * Rust: [async-graphql](https://github.com/async-graphql/async-graphql), [Juniper](https://github.com/graphql-rust/juniper)
 * .NET: [HotChocolate](https://github.com/ChilliCream/hotchocolate)
-* Pyton: [graphene](https://github.com/graphql-python/graphene)
+* Pyton: [Graphene](https://github.com/graphql-python/graphene)
 
 Pull requests welcome.
 
@@ -31,9 +31,12 @@ We've seen better performance from the Rust implementations on other machines.
 
 | Name            | Requests/sec |
 |-----------------|--------------|
-| graphql-crystal | 55402.33     |
-| gqlgen          | 35166.58     |
-| async-graphql   | 34755.06     |
-| juniper         | 34950.00     |
-| graphql-jit     | 8798.84      |
-| graphql-js      | 6110.67      |
+| graphql-crystal | 54725.47     |
+| gqlgen          | 35256.42     |
+| async-graphql   | 35064.59     |
+| juniper         | 34963.61     |
+| hotchocolate    | 22342.32     |
+| graphql-jit     | 7627.25      |
+| graphql-js      | 3144.17      |
+| graphql-yoga    | 2920.88      |
+| graphene        | 1441.74      |
