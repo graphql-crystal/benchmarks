@@ -6,6 +6,7 @@ b = [
   {"gqlgen", "./main", nil},
   {"graphene", "gunicorn", ["--log-level", "warning", "-w", System.cpu_count.to_s, "-b", "127.0.0.1:8000", "app:app"]},
   {"graphql-crystal", "./main", nil},
+  {"graphql-go", "./main", nil},
   {"graphql-jit", "node", ["index.js"]},
   {"graphql-js", "node", ["index.js"]},
   {"graphql-yoga", "node", ["--no-warnings", "index.js"]},
