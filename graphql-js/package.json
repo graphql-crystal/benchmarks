@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "express": "^4.17.3",
+    "express-graphql": "^0.12.0",
+    "graphql": "^15.3.0"
+  },
+  "type": "module"
+}

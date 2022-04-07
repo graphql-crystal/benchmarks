@@ -7,8 +7,8 @@ struct Query;
 
 #[Object]
 impl Query {
-    async fn hello(&self) -> String {
-        String::from("world")
+    async fn hello(&self) -> &str {
+        "world"
     }
 }
 

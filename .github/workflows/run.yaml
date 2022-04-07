@@ -3,7 +3,8 @@ name: Run benchmarks
 on:
   pull_request:
   push:
-
+    branches:
+      - main
 jobs:
   run:
     runs-on: ubuntu-latest

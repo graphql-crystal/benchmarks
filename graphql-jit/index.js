@@ -5,10 +5,8 @@ const { parse } = require("graphql");
 const { compileQuery } = require("graphql-jit");
 const { createSchema } = require("./schema");
 
-const numCPUs = cpus().length;
-
 if (cluster.isPrimary) {
-  for (let i = 0; i < numCPUs; i++) {
+  for (let i = 0; i < cpus().length; i++) {
     cluster.fork();
   }
 } else {
@@ -29,5 +27,4 @@ if (cluster.isPrimary) {
   });
 
   server.listen(8000);
-
 }

@@ -4,8 +4,10 @@ require "socket"
 b = [
   {"graphql-crystal", "./main", nil},
   {"graphql-jit", "node", ["index.js"]},
+  {"graphql-js", "node", ["index.js"]},
   {"async-graphql", "./target/release/async-graphql", nil},
   {"gqlgen", "./main", nil},
+  {"juniper", "./target/release/juniper", nil},
 ]
 
 ch = Channel(Nil).new
