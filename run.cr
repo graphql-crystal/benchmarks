@@ -34,7 +34,7 @@ b.each do |b|
   while !port_open?
     sleep 1
   end
-  if !system("wrk -t#{System.cpu_count} -c#{System.cpu_count * 50} -d5s --timeout 10s --script=post.lua --latency http://127.0.0.1:8000/graphql")
+  if !system("wrk -t#{System.cpu_count} -c#{System.cpu_count * 50} -d30s --timeout 10s --script=post.lua --latency http://127.0.0.1:8000/graphql")
     raise "fail"
   end
   p.terminate
