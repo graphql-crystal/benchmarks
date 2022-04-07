@@ -25,18 +25,17 @@ The API is served over HTTP using a common web server and load tested using [wrk
 
 ### Results
 
-Note: The results below are a sample from [GitHub actions](https://github.com/graphql-crystal/benchmarks/actions).
-We've seen better performance from the Rust implementations on other machines.
-
-
 | Name            | Requests/sec |
 |-----------------|--------------|
-| graphql-crystal | 54725.47     |
-| gqlgen          | 35256.42     |
-| async-graphql   | 35064.59     |
-| juniper         | 34963.61     |
-| hotchocolate    | 22342.32     |
-| graphql-jit     | 7627.25      |
-| graphql-js      | 3144.17      |
-| graphql-yoga    | 2920.88      |
-| graphene        | 1441.74      |
+| graphql-crystal | 54884.67     |
+| juniper         | 34539.78     |
+| gqlgen          | 33863.32     |
+| async-graphql   | 33832.83     |
+| hotchocolate    | 23054.02     |
+| graphql-go      | 11852.35     |
+| graphql-jit     | 8011.40      |
+| graphql-js      | 3112.23      |
+| graphql-yoga    | 2957.19      |
+| graphene        | 1438.09      |
+
+Results here are updated sporadically. For the latest results, see [actions](https://github.com/graphql-crystal/benchmarks/actions).
