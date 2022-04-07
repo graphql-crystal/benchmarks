@@ -2,10 +2,7 @@ require "kemal"
 require "graphql"
 
 @[GraphQL::Object]
-class Query
-  include GraphQL::ObjectType
-  include GraphQL::QueryType
-
+class Query < GraphQL::BaseQuery
   @[GraphQL::Field]
   def hello : String
     "world"
@@ -25,7 +22,6 @@ post "/graphql" do |env|
 end
 
 logging false
-gzip false
 Kemal.config.powered_by_header = false
 Kemal.config.port = 8000
 

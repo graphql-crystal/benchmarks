@@ -3,7 +3,26 @@ const {cpus} = require("os");
 const { createServer } = require("http");
 const { parse } = require("graphql");
 const { compileQuery } = require("graphql-jit");
-const { createSchema } = require("./schema");
+const { makeExecutableSchema } = require("@graphql-tools/schema");
+const { gql } = require("apollo-server-express");
+
+const typeDefs = gql`
+  type Query {
+    hello: String!
+  }
+`;
+
+const resolvers = {
+  Query: {
+    hello: () => "world",
+  },
+};
+
+createSchema = () =>
+  makeExecutableSchema({
+    typeDefs,
+    resolvers,
+  });
 
 if (cluster.isPrimary) {
   for (let i = 0; i < cpus().length; i++) {
