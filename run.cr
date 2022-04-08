@@ -17,6 +17,7 @@ b = [
   # {"hotchocolate", "./bin/release/net6.0/linux-x64/publish/hotchocolatebench"}
   {"juniper", "./target/release/juniper", nil},
   {"sangria", "java", ["-Xrs", "-Xmx4G", "-jar", "./target/scala-2.13/sangria-assembly-0.1.0-SNAPSHOT.jar"]},
+  {"tartiflette", "pipenv", ["-q", "run", "--", "python", "app.py"]},
 ]
 
 ch = Channel(Nil).new
