@@ -7,7 +7,7 @@ Benchmarks of the following GraphQL implementations:
 * JavaScript: [graphql-jit](https://github.com/zalando-incubator/graphql-jit), [graphql-js](https://github.com/graphql/graphql-js), [graphql-yoga](https://github.com/dotansimha/graphql-yoga)
 * Rust: [async-graphql](https://github.com/async-graphql/async-graphql), [Juniper](https://github.com/graphql-rust/juniper)
 * .NET: [HotChocolate](https://github.com/ChilliCream/hotchocolate)
-* Python: [Graphene](https://github.com/graphql-python/graphene)
+* Python: [Graphene](https://github.com/graphql-python/graphene), [Strawberry](https://github.com/strawberry-graphql/strawberry), [tartiflette](https://github.com/tartiflette/tartiflette)
 * JVM: [Sangria](https://github.com/sangria-graphql/sangria)
 
 Pull requests welcome.

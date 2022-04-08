@@ -17,6 +17,7 @@ b = [
   # {"hotchocolate", "./bin/release/net6.0/linux-x64/publish/hotchocolatebench"}
   {"juniper", "./target/release/juniper", nil},
   {"sangria", "java", ["-Xrs", "-Xmx4G", "-jar", "./target/scala-2.13/sangria-assembly-0.1.0-SNAPSHOT.jar"]},
+  {"strawberry", "pipenv", ["-q", "run", "--", "gunicorn", "--log-level", "warning", "-w", System.cpu_count.to_s, "-b", "127.0.0.1:8000", "app:app"]},
   {"tartiflette", "pipenv", ["-q", "run", "--", "python", "app.py"]},
 ]
 
