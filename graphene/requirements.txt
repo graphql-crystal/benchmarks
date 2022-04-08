@@ -1,5 +1,0 @@
-setuptools
-graphene>=3.0
-flask
-graphql-server
-gunicorn

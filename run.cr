@@ -1,11 +1,12 @@
 #!/usr/bin/crystal
 require "socket"
 require "http"
+require "json"
 
 b = [
   {"async-graphql", "./target/release/async-graphql", nil},
   {"gqlgen", "./main", nil},
-  {"graphene", "gunicorn", ["--log-level", "warning", "-w", System.cpu_count.to_s, "-b", "127.0.0.1:8000", "app:app"]},
+  {"graphene", "pipenv", ["-q", "run", "--", "gunicorn", "--log-level", "warning", "-w", System.cpu_count.to_s, "-b", "127.0.0.1:8000", "app:app"]},
   {"graphql-crystal", "./main", nil},
   {"graphql-go", "./main", nil},
   {"graphql-jit", "node", ["index.js"]},
@@ -28,7 +29,7 @@ b.each do |b|
     run("cargo", ["build", "--release", "--quiet"], dir).wait if File.exists? dir.join("Cargo.toml")
     run("go", ["build", "-o", "main", "main.go"], dir).wait if File.exists? dir.join("go.mod")
     run("dotnet", ["publish", "-c", "release", "-r", "linux-x64", "--sc", "-v", "quiet", "--nologo"], dir).wait if File.exists? dir.join("appsettings.json")
-    run("pip", ["install", "-q", "-r", "requirements.txt"], dir).wait if File.exists? dir.join("requirements.txt")
+    run("pipenv", ["install", "-q"], dir).wait if File.exists? dir.join("Pipfile")
     run("sbt", ["--warn", "compile", "assembly"], dir).wait if File.exists? dir.join("build.sbt")
     ch.send(nil)
   end
@@ -47,8 +48,8 @@ b.each do |b|
   end
 
   res = HTTP::Client.post("http://127.0.0.1:8000/graphql", HTTP::Headers{"Content-Type" => "application/json"}, %({"query":"{ hello }"}))
-  if res.body != %({"data":{"hello":"world"}})
-    raise "invalid response: #{res.body}"
+  if JSON.parse(res.body).to_json != %({"data":{"hello":"world"}})
+    raise "unexpected response: #{res.body}"
   end
 
   if !system("wrk -t#{System.cpu_count} -c#{System.cpu_count * 50} -d10s --script=post.lua --latency http://127.0.0.1:8000/graphql")
