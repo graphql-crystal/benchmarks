@@ -1,5 +1,6 @@
 #!/usr/bin/crystal
 require "socket"
+require "http"
 
 b = [
   {"async-graphql", "./target/release/async-graphql", nil},
@@ -44,12 +45,20 @@ b.each do |b|
   while !port_open?
     sleep 1
   end
+
+  res = HTTP::Client.post("http://127.0.0.1:8000/graphql", HTTP::Headers{"Content-Type" => "application/json"}, %({"query":"{ hello }"}))
+  if res.body != %({"data":{"hello":"world"}})
+    raise "invalid response: #{res.body}"
+  end
+
   if !system("wrk -t#{System.cpu_count} -c#{System.cpu_count * 50} -d10s --script=post.lua --latency http://127.0.0.1:8000/graphql")
     raise "fail"
   end
   p.terminate
   r = p.wait
   raise "failed with exit code #{r.exit_code}" if r.exit_code != 0
+ensure
+  p.terminate unless p.nil? || p.terminated?
 end
 
 def run(cmd, args = nil, dir = nil)
