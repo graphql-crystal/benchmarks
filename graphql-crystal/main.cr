@@ -22,7 +22,6 @@ post "/graphql" do |env|
 end
 
 logging false
-Kemal.config.powered_by_header = false
 Kemal.config.port = 8000
 
 Signal::TERM.trap do
