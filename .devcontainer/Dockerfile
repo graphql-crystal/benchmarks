@@ -16,5 +16,4 @@ ENV USER=vscode
 
 RUN bash -c "sh <(curl -L https://nixos.org/nix/install) --no-daemon" \
   && . /home/vscode/.nix-profile/etc/profile.d/nix.sh \
-  && nix-env -iA -f '<nixpkgs>' wrk rustc cargo go nodejs nodePackages.npm dotnet-sdk nim openjdk sbt python3Full pipenv \
-  && ssh-keyscan github.com >> ~/.ssh/known_hosts
+  && nix-env -iA -f '<nixpkgs>' wrk rustc cargo go nodejs nodePackages.npm dotnet-sdk nim openjdk sbt python3Full pipenv

@@ -6,7 +6,7 @@ require "json"
 b = [
   {"async-graphql", "./target/release/async-graphql", nil},
   {"gqlgen", "./main", nil},
-  {"graphene", "pipenv", ["-q", "run", "--", "gunicorn", "--log-level", "warning", "-w", System.cpu_count.to_s, "-b", "127.0.0.1:8000", "app:app"]},
+  {"graphene", "pipenv", ["run", "--", "gunicorn", "--log-level", "warning", "-w", System.cpu_count.to_s, "-b", "127.0.0.1:8000", "app:app"]},
   {"graphql-crystal", "./main", nil},
   {"graphql-go", "./main", nil},
   {"graphql-jit", "node", ["index.js"]},
@@ -17,8 +17,8 @@ b = [
   # {"hotchocolate", "./bin/release/net6.0/linux-x64/publish/hotchocolatebench"}
   {"juniper", "./target/release/juniper", nil},
   {"sangria", "java", ["-Xrs", "-Xmx4G", "-jar", "./target/scala-2.13/sangria-assembly-0.1.0-SNAPSHOT.jar"]},
-  {"strawberry", "pipenv", ["-q", "run", "--", "gunicorn", "--log-level", "warning", "-w", System.cpu_count.to_s, "-b", "127.0.0.1:8000", "app:app"]},
-  {"tartiflette", "pipenv", ["-q", "run", "--", "python", "app.py"]},
+  {"strawberry", "pipenv", ["run", "--", "gunicorn", "--log-level", "warning", "-w", System.cpu_count.to_s, "-b", "127.0.0.1:8000", "app:app"]},
+  {"tartiflette", "pipenv", ["run", "--", "python", "app.py"]},
 ]
 
 ch = Channel(Nil).new
@@ -31,7 +31,7 @@ b.each do |b|
     run("cargo", ["build", "--release", "--quiet"], dir).wait if File.exists? dir.join("Cargo.toml")
     run("go", ["build", "-o", "main", "main.go"], dir).wait if File.exists? dir.join("go.mod")
     run("dotnet", ["publish", "-c", "release", "-r", "linux-x64", "--sc", "-v", "quiet", "--nologo"], dir).wait if File.exists? dir.join("appsettings.json")
-    run("pipenv", ["install", "-q"], dir).wait if File.exists? dir.join("Pipfile")
+    run("pipenv", ["sync"], dir).wait if File.exists? dir.join("Pipfile")
     run("sbt", ["--warn", "compile", "assembly"], dir).wait if File.exists? dir.join("build.sbt")
     ch.send(nil)
   end
@@ -60,6 +60,7 @@ b.each do |b|
   p.terminate
   r = p.wait
   raise "failed with exit code #{r.exit_code}" if r.exit_code != 0
+  sleep 1
 ensure
   p.terminate unless p.nil? || p.terminated?
 end
