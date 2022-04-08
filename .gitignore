@@ -1,7 +1,8 @@
 lib
 node_modules
 bin
-main
 target
 obj
 __pycache__
+.metals
+.bloop

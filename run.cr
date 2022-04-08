@@ -14,13 +14,13 @@ b = [
   # No usable version of libssl was found
   # {"hotchocolate", "./bin/release/net6.0/linux-x64/publish/hotchocolatebench"}
   {"juniper", "./target/release/juniper", nil},
+  {"sangria", "java", ["-Xrs", "-Xmx4G", "-jar", "./target/scala-2.13/sangria-assembly-0.1.0-SNAPSHOT.jar"]},
 ]
 
 ch = Channel(Nil).new
 b.each do |b|
   spawn do
     dir = Path[Dir.current, b[0]]
-
     run("shards", ["install", "-q", "--frozen"], dir).wait if File.exists? dir.join("shard.yml")
     run("crystal", ["build", "--release", "-D", "preview_mt", "main.cr"], dir).wait if File.exists? dir.join("shard.yml")
     run("npm", ["ci", "--silent"], dir).wait if File.exists? dir.join("package.json")
@@ -28,7 +28,7 @@ b.each do |b|
     run("go", ["build", "-o", "main", "main.go"], dir).wait if File.exists? dir.join("go.mod")
     run("dotnet", ["publish", "-c", "release", "-r", "linux-x64", "--sc", "-v", "quiet", "--nologo"], dir).wait if File.exists? dir.join("appsettings.json")
     run("pip", ["install", "-q", "-r", "requirements.txt"], dir).wait if File.exists? dir.join("requirements.txt")
-
+    run("sbt", ["--warn", "compile", "assembly"], dir).wait if File.exists? dir.join("build.sbt")
     ch.send(nil)
   end
 end

@@ -1,0 +1,21 @@
+name := "sangria"
+
+ThisBuild / scalaVersion := "2.13.8"
+
+scalacOptions ++= Seq("-Ywarn-unused", "-deprecation")
+
+assembly / mainClass := Some("Server")
+
+libraryDependencies ++= Seq(
+  "org.sangria-graphql" %% "sangria" % "2.1.6",
+  "org.sangria-graphql" %% "sangria-akka-http-core" % "0.0.2",
+  "org.sangria-graphql" %% "sangria-akka-http-circe" % "0.0.2",
+  "com.typesafe.akka" %% "akka-actor" % "2.6.15",
+  "com.typesafe.akka" %% "akka-stream" % "2.6.15",
+  "com.typesafe.akka" %% "akka-http" % "10.2.4",
+  "de.heikoseeberger" %% "akka-http-circe" % "1.36.0",
+  "io.circe" %% "circe-core" % "0.14.1",
+  "io.circe" %% "circe-parser" % "0.14.1",
+  "io.circe" %% "circe-optics" % "0.14.1",
+  "ch.qos.logback" % "logback-classic" % "1.2.11",
+)

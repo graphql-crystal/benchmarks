@@ -14,7 +14,10 @@
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"crystal-lang-tools.crystal-lang"
+		"crystal-lang-tools.crystal-lang",
+		"kosz78.nim",
+		"scala-lang.scala",
+		"scalameta.metals"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
