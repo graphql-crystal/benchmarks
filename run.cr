@@ -93,7 +93,7 @@ def wait_unbound(time : Int32)
 end
 
 def port_bound?
-  s = TCPServer.new("localhost", 8000)
+  s = TCPServer.new("127.0.0.1", 8000)
   s.close
   false
 rescue Socket::BindError

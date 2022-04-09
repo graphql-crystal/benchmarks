@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - run: sudo apt-get install -y psmisc
     - uses: crystal-lang/install-crystal@v1
     - uses: ruby/setup-ruby@v1
       with:
