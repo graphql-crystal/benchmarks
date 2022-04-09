@@ -32,21 +32,27 @@ b.each do |b|
     run("cargo", ["build", "--release", "--quiet"], dir).wait if File.exists? dir.join("Cargo.toml")
     run("go", ["build", "-o", "main", "main.go"], dir).wait if File.exists? dir.join("go.mod")
     run("dotnet", ["publish", "-c", "release", "-r", "linux-x64", "--sc", "-v", "quiet", "--nologo"], dir).wait if File.exists? dir.join("appsettings.json")
-    run("pipenv", ["sync"], dir).wait if File.exists? dir.join("Pipfile")
+    run("pipenv", ["install"], dir).wait if File.exists? dir.join("Pipfile")
     run("sbt", ["--warn", "compile", "assembly"], dir).wait if File.exists? dir.join("build.sbt")
+    run("bundle", ["install", "--quiet"], dir).wait if File.exists? dir.join("Gemfile")
     ch.send(nil)
   end
 end
 b.each { |b| ch.receive }
 
 b.each do |b|
-  if port_open?
-    raise "port 8000 already in use"
+  if port_bound?
+    # a TERM signal doesn't always end all processes
+    # agoo takes many seconds to terminate, and python doesn't terminate since we started using `pipenv run`
+    # there may be a proper solution for each case, but for now we use fuser as a workaround
+    system("fuser -k 8000/tcp")
+    raise "port 8000 already in use" unless wait_unbound 60
+    puts "killed socket process"
   end
   puts "--- #{b[0]}"
   dir = Path[Dir.current, b[0]]
   p = run(b[1], b[2], dir)
-  while !port_open?
+  while !port_bound?
     sleep 1
   end
 
@@ -61,7 +67,6 @@ b.each do |b|
   p.terminate
   r = p.wait
   raise "failed with exit code #{r.exit_code}" if r.exit_code != 0
-  sleep 1
 ensure
   p.terminate unless p.nil? || p.terminated?
 end
@@ -70,10 +75,23 @@ def run(cmd, args = nil, dir = nil)
   Process.new(cmd, env: {"CRYSTAL_WORKERS" => System.cpu_count.to_s}, shell: false, args: args, input: Process::Redirect::Inherit, output: Process::Redirect::Inherit, error: Process::Redirect::Inherit, chdir: dir.to_s)
 end
 
-def port_open?
-  s = TCPSocket.new("127.0.0.1", 8000, connect_timeout: 1)
+def wait_unbound(time : Int32)
+  if port_bound?
+    if time > 0
+      sleep 1
+      wait_unbound time - 1
+    else
+      false
+    end
+  else
+    true
+  end
+end
+
+def port_bound?
+  s = TCPServer.new("localhost", 8000)
   s.close
-  true
-rescue IO::TimeoutError | Socket::ConnectError
   false
+rescue Socket::BindError
+  true
 end
