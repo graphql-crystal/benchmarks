@@ -38,6 +38,9 @@ b.each do |b|
     run("bundle", ["install", "--quiet"], dir).wait if File.exists? dir.join("Gemfile")
     puts "#{b[0]} build finished"
     ch.send(nil)
+  rescue ex
+    puts ex.message
+    exit 1
   end
 end
 b.each { |b| ch.receive }
