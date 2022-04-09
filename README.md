@@ -1,17 +1,6 @@
 # GraphQL server benchmarks
 
-Benchmarks of the following GraphQL implementations:
-
-* Crystal: [graphql-crystal](https://github.com/graphql-crystal/graphql)
-* Go: [gqlgen](https://github.com/99designs/gqlgen), [graphql-go](https://github.com/graphql-go/graphql)
-* JavaScript: [graphql-jit](https://github.com/zalando-incubator/graphql-jit), [graphql-js](https://github.com/graphql/graphql-js), [graphql-yoga](https://github.com/dotansimha/graphql-yoga)
-* Rust: [async-graphql](https://github.com/async-graphql/async-graphql), [Juniper](https://github.com/graphql-rust/juniper)
-* .NET: [HotChocolate](https://github.com/ChilliCream/hotchocolate)
-* Python: [Graphene](https://github.com/graphql-python/graphene), [Strawberry](https://github.com/strawberry-graphql/strawberry), [tartiflette](https://github.com/tartiflette/tartiflette)
-* JVM: [Sangria](https://github.com/sangria-graphql/sangria)
-* Ruby: [agoo](https://github.com/ohler55/agoo)
-
-Pull requests welcome.
+Graphql server benchmarks in many languages. Pull requests welcome.
 
 All servers implement a simple schema:
 
@@ -27,21 +16,21 @@ The API is served over HTTP using a common web server and load tested using [wrk
 
 ### Results
 
-| Name            | Requests/sec |
-|-----------------|--------------|
-| graphql-crystal | 37874        |
-| gqlgen          | 20849        |
-| async-graphql   | 20740        |
-| juniper         | 19636        |
-| hotchocolate    | 14918        |
-| agoo            | 9451         |
-| graphql-go      | 8627         |
-| graphql-jit     | 4799         |
-| graphql-js      | 2271         |
-| graphql-yoga    | 1957         |
-| sangria         | 1523         |
-| graphene        | 1077         |
-| strawberry      | 947          |
-| graphql-ruby    | 816          |
+| Name                                                            | Language | Server       | Requests/sec |
+| --------------------------------------------------------------- | -------- | ------------ | ------------ |
+| [graphql-crystal](https://github.com/graphql-crystal/graphql)   | Crystal  | Kemal        | 61358        |
+| [async-graphql](https://github.com/async-graphql/async-graphql) | Rust     | Actix Web    | 39312        |
+| [Juniper](https://github.com/graphql-rust/juniper)              | Rust     | Actix Web    | 38799        |
+| [gqlgen](https://github.com/99designs/gqlgen)                   | Go       | net/http     | 36744        |
+| [HotChocolate](https://github.com/ChilliCream/hotchocolate)     | C#       | ASP.NET Core | 24411        |
+| [graphql-go](https://github.com/graphql-go/graphql)             | Go       | net/http     | 13291        |
+| [agoo](https://github.com/ohler55/agoo)                         | Ruby/C   | Builtin      | 9677         |
+| [graphql-jit](https://github.com/zalando-incubator/graphql-jit) | Node.js  | http         | 8837         |
+| [graphql-js](https://github.com/graphql/graphql-js)             | Node.js  | Express      | 3840         |
+| [graphql-ruby](https://graphql-ruby.org/)                       | Ruby     | Puma         | 3671         |
+| [Sangria](https://github.com/sangria-graphql/sangria)           | Scala    | Akka HTTP    | 2672         |
+| [graphql-yoga](https://github.com/dotansimha/graphql-yoga)      | Node.js  | http         | 1957         |
+| [Graphene](https://github.com/graphql-python/graphene)          | Python   | gunicorn     | 1435         |
+| [Strawberry](https://github.com/strawberry-graphql/strawberry)  | Python   | gunicorn     | 1153         |
 
 Results are updated sporadically. For the latest results, see [actions](https://github.com/graphql-crystal/benchmarks/actions).
