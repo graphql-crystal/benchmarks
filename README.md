@@ -9,7 +9,7 @@ Benchmarks of the following GraphQL implementations:
 * .NET: [HotChocolate](https://github.com/ChilliCream/hotchocolate)
 * Python: [Graphene](https://github.com/graphql-python/graphene), [Strawberry](https://github.com/strawberry-graphql/strawberry), [tartiflette](https://github.com/tartiflette/tartiflette)
 * JVM: [Sangria](https://github.com/sangria-graphql/sangria)
-* Ruby: [agoo](https://github.com/ohler55/agoo)
+* Ruby: [agoo](https://github.com/ohler55/agoo), [graphql-ruby](https://graphql-ruby.org/)
 
 Pull requests welcome.
 
