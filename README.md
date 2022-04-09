@@ -29,16 +29,19 @@ The API is served over HTTP using a common web server and load tested using [wrk
 
 | Name            | Requests/sec |
 |-----------------|--------------|
-| graphql-crystal | 45705        |
-| gqlgen          | 30724        |
-| async-graphql   | 30333        |
-| juniper         | 29376        |
-| hotchocolate    | 18483        |
-| graphql-go      | 10031        |
-| graphql-jit     | 6242         |
-| graphql-js      | 2645         |
-| graphql-yoga    | 2451         |
-| sangria         | 1588         |
-| graphene        | 1238         |
+| graphql-crystal | 37874        |
+| gqlgen          | 20849        |
+| async-graphql   | 20740        |
+| juniper         | 19636        |
+| hotchocolate    | 14918        |
+| agoo            | 9451         |
+| graphql-go      | 8627         |
+| graphql-jit     | 4799         |
+| graphql-js      | 2271         |
+| graphql-yoga    | 1957         |
+| sangria         | 1523         |
+| graphene        | 1077         |
+| strawberry      | 947          |
+| graphql-ruby    | 816          |
 
 Results are updated sporadically. For the latest results, see [actions](https://github.com/graphql-crystal/benchmarks/actions).
