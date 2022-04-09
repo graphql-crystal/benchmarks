@@ -12,6 +12,7 @@ b = [
   {"graphql-go", "./main", nil},
   {"graphql-jit", "node", ["index.js"]},
   {"graphql-js", "node", ["index.js"]},
+  {"graphql-js", "ruby", ["main.rb"]},
   {"graphql-yoga", "node", ["--no-warnings", "index.js"]},
   {"hotchocolate", "dotnet", ["run", "-v", "quiet", "--nologo"]},
   # No usable version of libssl was found
