@@ -1,0 +1,7 @@
+{
+  "main": "index.js",
+  "dependencies": {
+    "fastify": "^3.28.0",
+    "mercurius": "^9.3.6"
+  }
+}
