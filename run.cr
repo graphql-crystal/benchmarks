@@ -12,7 +12,7 @@ b = [
   {"graphql-go", "./main", nil},
   {"graphql-jit", "node", ["index.js"]},
   {"graphql-js", "node", ["index.js"]},
-  {"graphql-ruby", "puma", ["-w", System.cpu_count.to_s, "-t", "2", "-b", "tcp://127.0.0.1:8000"]},
+  {"graphql-ruby", "puma", ["-w", System.cpu_count.to_s, "-s", "-t", "2", "-b", "tcp://127.0.0.1:8000"]},
   {"graphql-yoga", "node", ["--no-warnings", "index.js"]},
   {"hotchocolate", "dotnet", ["run", "-v", "quiet", "--nologo"]},
   # No usable version of libssl was found
