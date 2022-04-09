@@ -33,17 +33,17 @@ b.each do |b|
     dir = Path[Dir.current, b[0]]
     if File.exists? dir.join("shard.yml")
       shards_mut.synchronize do
-        run("shards", ["install", "-q", "--frozen"], dir).wait
+        wait_p run("shards", ["install", "-q", "--frozen"], dir)
       end
     end
-    run("crystal", ["build", "--release", "-D", "preview_mt", "main.cr"], dir).wait if File.exists? dir.join("shard.yml")
-    run("npm", ["ci", "--silent"], dir).wait if File.exists? dir.join("package.json")
-    run("cargo", ["build", "--release", "--quiet"], dir).wait if File.exists? dir.join("Cargo.toml")
-    run("go", ["build", "-o", "main", "main.go"], dir).wait if File.exists? dir.join("go.mod")
-    run("dotnet", ["publish", "-c", "release", "-r", "linux-x64", "--sc", "-v", "quiet", "--nologo"], dir).wait if File.exists? dir.join("appsettings.json")
-    run("pipenv", ["install"], dir).wait if File.exists? dir.join("Pipfile")
-    run("sbt", ["--warn", "compile", "assembly"], dir).wait if File.exists? dir.join("build.sbt")
-    run("bundle", ["install", "--quiet"], dir).wait if File.exists? dir.join("Gemfile")
+    wait_p run("crystal", ["build", "--release", "-D", "preview_mt", "main.cr"], dir) if File.exists? dir.join("shard.yml")
+    wait_p run("npm", ["ci", "--silent"], dir) if File.exists? dir.join("package.json")
+    wait_p run("cargo", ["build", "--release", "--quiet"], dir) if File.exists? dir.join("Cargo.toml")
+    wait_p run("go", ["build", "-o", "main", "main.go"], dir) if File.exists? dir.join("go.mod")
+    wait_p run("dotnet", ["publish", "-c", "release", "-r", "linux-x64", "--sc", "-v", "quiet", "--nologo"], dir) if File.exists? dir.join("appsettings.json")
+    wait_p run("pipenv", ["install"], dir) if File.exists? dir.join("Pipfile")
+    wait_p run("sbt", ["--warn", "compile", "assembly"], dir) if File.exists? dir.join("build.sbt")
+    wait_p run("bundle", ["install", "--quiet"], dir) if File.exists? dir.join("Gemfile")
     ch.send(nil)
   rescue ex
     puts ex.message
@@ -81,14 +81,21 @@ b.each do |b|
     raise "fail"
   end
   p.terminate
-  r = p.wait
-  raise "failed with exit code #{r.exit_code}" if r.exit_code != 0
-ensure
-  p.terminate unless p.nil? || p.terminated?
+  wait_p p
 end
 
 def run(cmd, args = nil, dir = nil)
-  Process.new(cmd, env: {"CRYSTAL_WORKERS" => System.cpu_count.to_s}, shell: false, args: args, input: Process::Redirect::Inherit, output: Process::Redirect::Inherit, error: Process::Redirect::Inherit, chdir: dir.to_s)
+  p = Process.new(cmd, env: {"CRYSTAL_WORKERS" => System.cpu_count.to_s}, shell: false, args: args, input: Process::Redirect::Inherit, output: Process::Redirect::Inherit, error: Process::Redirect::Inherit, chdir: dir.to_s)
+  at_exit { p.terminate unless p.terminated? }
+  p
+end
+
+def wait_p(p)
+  r = p.wait
+  if r.exit_code != 0
+    puts "command failed with exit code #{r.exit_code}"
+    exit 1
+  end
 end
 
 def wait_unbound(time : Int32)
