@@ -25,11 +25,17 @@ b = [
   # {"tartiflette", "pipenv", ["run", "--", "python", "app.py"]},
 ]
 
+shards_mut = Mutex.new
+
 ch = Channel(Nil).new
 b.each do |b|
   spawn do
     dir = Path[Dir.current, b[0]]
-    run("shards", ["install", "-q", "--frozen"], dir).wait if File.exists? dir.join("shard.yml")
+    if File.exists? dir.join("shard.yml")
+      shards_mut.synchronize do
+        run("shards", ["install", "-q", "--frozen"], dir).wait
+      end
+    end
     run("crystal", ["build", "--release", "-D", "preview_mt", "main.cr"], dir).wait if File.exists? dir.join("shard.yml")
     run("npm", ["ci", "--silent"], dir).wait if File.exists? dir.join("package.json")
     run("cargo", ["build", "--release", "--quiet"], dir).wait if File.exists? dir.join("Cargo.toml")
