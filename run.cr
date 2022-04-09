@@ -19,7 +19,8 @@ b = [
   {"juniper", "./target/release/juniper", nil},
   {"sangria", "java", ["-Xrs", "-Xmx4G", "-jar", "./target/scala-2.13/sangria-assembly-0.1.0-SNAPSHOT.jar"]},
   {"strawberry", "pipenv", ["run", "--", "gunicorn", "--log-level", "warning", "-w", System.cpu_count.to_s, "-b", "127.0.0.1:8000", "app:app"]},
-  {"tartiflette", "pipenv", ["run", "--", "python", "app.py"]},
+  # libgraphqlparser fails to load and idk why
+  # {"tartiflette", "pipenv", ["run", "--", "python", "app.py"]},
 ]
 
 ch = Channel(Nil).new
@@ -35,6 +36,7 @@ b.each do |b|
     run("pipenv", ["install"], dir).wait if File.exists? dir.join("Pipfile")
     run("sbt", ["--warn", "compile", "assembly"], dir).wait if File.exists? dir.join("build.sbt")
     run("bundle", ["install", "--quiet"], dir).wait if File.exists? dir.join("Gemfile")
+    puts "#{b[0]} build finished"
     ch.send(nil)
   end
 end
