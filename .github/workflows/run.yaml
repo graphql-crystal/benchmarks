@@ -39,6 +39,6 @@ jobs:
         path: ~/.npm
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
     - name: Install dependencies
-      run: nix-env -f '<nixpkgs>' -iA wrk rustc cargo go nodejs nodePackages.npm dotnet-sdk openjdk sbt python3Full pipenv cmake ruby bundle
+      run: nix-env -f '<nixpkgs>' -iA wrk rustc cargo go nodejs nodePackages.npm dotnet-sdk openjdk sbt python3Full pipenv cmake ruby bundler
     - name: Run benchmarks
       run: crystal run.cr

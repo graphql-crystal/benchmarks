@@ -36,7 +36,6 @@ b.each do |b|
     run("pipenv", ["install"], dir).wait if File.exists? dir.join("Pipfile")
     run("sbt", ["--warn", "compile", "assembly"], dir).wait if File.exists? dir.join("build.sbt")
     run("bundle", ["install", "--quiet"], dir).wait if File.exists? dir.join("Gemfile")
-    puts "#{b[0]} build finished"
     ch.send(nil)
   rescue ex
     puts ex.message
