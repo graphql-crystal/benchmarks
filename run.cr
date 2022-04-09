@@ -14,9 +14,7 @@ b = [
   {"graphql-js", "node", ["index.js"]},
   {"graphql-ruby", "puma", ["-w", System.cpu_count.to_s, "-s", "-t", "2", "-b", "tcp://127.0.0.1:8000"]},
   {"graphql-yoga", "node", ["--no-warnings", "index.js"]},
-  {"hotchocolate", "dotnet", ["run", "-v", "quiet", "--nologo"]},
-  # No usable version of libssl was found
-  # {"hotchocolate", "./bin/release/net6.0/linux-x64/publish/hotchocolatebench"}
+  {"hotchocolate", "dotnet", ["run", "-c", "Release", "-v", "quiet", "--nologo"]},
   {"juniper", "./target/release/juniper", nil},
   {"sangria", "java", ["-Xrs", "-Xmx4G", "-jar", "./target/scala-2.13/sangria-assembly-0.1.0-SNAPSHOT.jar"]},
   {"static", "./main", nil},
@@ -40,7 +38,6 @@ b.each do |b|
     wait_p run("npm", ["ci", "--silent"], dir) if File.exists? dir.join("package.json")
     wait_p run("cargo", ["build", "--release", "--quiet"], dir) if File.exists? dir.join("Cargo.toml")
     wait_p run("go", ["build", "-o", "main", "main.go"], dir) if File.exists? dir.join("go.mod")
-    wait_p run("dotnet", ["publish", "-c", "release", "-r", "linux-x64", "--sc", "-v", "quiet", "--nologo"], dir) if File.exists? dir.join("appsettings.json")
     wait_p run("pipenv", ["install"], dir) if File.exists? dir.join("Pipfile")
     wait_p run("sbt", ["--warn", "compile", "assembly"], dir) if File.exists? dir.join("build.sbt")
     wait_p run("bundle", ["install", "--quiet"], dir) if File.exists? dir.join("Gemfile")
