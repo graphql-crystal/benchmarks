@@ -13,6 +13,7 @@ b = [
   {"graphql-go", "./main", nil},
   {"graphql-jit", "node", ["index.js"]},
   {"graphql-js", "node", ["index.js"]},
+  {"graphql-ruby", "ruby", ["main.rb"]},
   {"graphql-yoga", "node", ["--no-warnings", "index.js"]},
   {"hotchocolate", "dotnet", ["run", "-v", "quiet", "--nologo"]},
   # No usable version of libssl was found
@@ -55,13 +56,17 @@ b.each do |b|
     puts "killed socket process"
   end
   puts "--- #{b[0]}"
-  dir = Path[Dir.current, b[0]]
-  p = run(b[1], b[2], dir)
+
+  p = run(b[1], b[2], Path[Dir.current, b[0]])
+
   while !port_bound?
+    raise "fail" if p.terminated?
     sleep 1
   end
 
-  res = HTTP::Client.post("http://127.0.0.1:8000/graphql", HTTP::Headers{"Content-Type" => "application/json"}, %({"query":"{ hello }"}))
+  client = HTTP::Client.new "127.0.0.1", 8000
+  client.read_timeout = 5
+  res = client.post "/graphql", HTTP::Headers{"Content-Type" => "application/json"}, %({"query":"{ hello }"})
   if JSON.parse(res.body).to_json != %({"data":{"hello":"world"}})
     raise "unexpected response: #{res.body}"
   end
