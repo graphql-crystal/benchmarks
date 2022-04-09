@@ -10,8 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - run: sudo apt-get update # act
     - run: sudo apt-get install -y psmisc
-    - uses: crystal-lang/install-crystal@v1
+    - run: curl -fsSL https://crystal-lang.org/install.sh | bash
+    # broken on act
+    #- uses: crystal-lang/install-crystal@v1
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: 2.7

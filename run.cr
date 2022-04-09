@@ -55,9 +55,11 @@ b.each do |b|
     puts "killed socket process"
   end
   puts "--- #{b[0]}"
-  dir = Path[Dir.current, b[0]]
-  p = run(b[1], b[2], dir)
+
+  p = run(b[1], b[2], Path[Dir.current, b[0]])
+
   while !port_bound?
+    raise "fail" if p.terminated?
     sleep 1
   end
 
