@@ -4,6 +4,7 @@ require "http"
 require "json"
 
 b = [
+  {"agoo", "ruby", ["main.rb"]},
   {"async-graphql", "./target/release/async-graphql", nil},
   {"gqlgen", "./main", nil},
   {"graphene", "pipenv", ["run", "--", "gunicorn", "--log-level", "warning", "-w", System.cpu_count.to_s, "-b", "127.0.0.1:8000", "app:app"]},
