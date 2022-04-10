@@ -1,19 +1,19 @@
-const cluster = require("cluster");
-const {cpus} = require("os");
-const Fastify = require('fastify')
-const mercurius = require('mercurius')
+import cluster from "cluster";
+import { cpus } from "os";
+import Fastify from "fastify";
+import mercurius from "mercurius";
 
 const schema = `
   type Query {
     hello(name: String): String!
   }
-`
+`;
 
 const resolvers = {
   Query: {
-    hello: async (_, { name }) => 'world'
-  }
-}
+    hello: async () => "world",
+  },
+};
 
 if (cluster.isPrimary) {
   for (let i = 0; i < cpus().length; i++) {
@@ -23,7 +23,7 @@ if (cluster.isPrimary) {
   const app = Fastify();
   app.register(mercurius, {
     schema,
-    resolvers
+    resolvers,
   });
 
   app.listen(8000);

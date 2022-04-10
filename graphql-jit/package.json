@@ -5,7 +5,5 @@
     "graphql": "^16.3.0",
     "graphql-jit": "^0.7.3"
   },
-  "scripts": {
-    "start": "node index.js"
-  }
+  "type": "module"
 }

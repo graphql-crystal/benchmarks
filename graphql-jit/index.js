@@ -1,10 +1,10 @@
-const cluster = require("cluster");
-const {cpus} = require("os");
-const { createServer } = require("http");
-const { parse } = require("graphql");
-const { compileQuery } = require("graphql-jit");
-const { makeExecutableSchema } = require("@graphql-tools/schema");
-const { gql } = require("apollo-server-express");
+import cluster from "cluster";
+import { cpus } from "os";
+import { createServer } from "http";
+import { parse } from "graphql";
+import { compileQuery } from "graphql-jit";
+import { makeExecutableSchema } from "@graphql-tools/schema";
+import { gql } from "apollo-server-express";
 
 const typeDefs = gql`
   type Query {
@@ -18,7 +18,7 @@ const resolvers = {
   },
 };
 
-createSchema = () =>
+const createSchema = () =>
   makeExecutableSchema({
     typeDefs,
     resolvers,
