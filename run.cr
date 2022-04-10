@@ -4,6 +4,7 @@ require "http"
 require "json"
 
 b = [
+  {"absinthe", "mix", ["phx.server"]},
   {"agoo", "ruby", ["main.rb"]},
   {"async-graphql", "./target/release/async-graphql", nil},
   {"gqlgen", "./main", nil},
@@ -41,6 +42,8 @@ b.each do |b|
     wait_p run("pipenv", ["install"], dir) if File.exists? dir.join("Pipfile")
     wait_p run("sbt", ["--warn", "compile", "assembly"], dir) if File.exists? dir.join("build.sbt")
     wait_p run("bundle", ["install", "--quiet"], dir) if File.exists? dir.join("Gemfile")
+    wait_p run("mix", ["deps.get", "--only", "prod"], dir) if File.exists? dir.join("mix.exs")
+    wait_p run("mix", ["compile"], dir) if File.exists? dir.join("mix.exs")
     ch.send(nil)
   rescue ex
     puts ex.message
@@ -81,8 +84,9 @@ b.each do |b|
   wait_p p
 end
 
-def run(cmd, args = nil, dir = nil)
-  p = Process.new(cmd, env: {"CRYSTAL_WORKERS" => System.cpu_count.to_s}, shell: false, args: args, input: Process::Redirect::Inherit, output: Process::Redirect::Inherit, error: Process::Redirect::Inherit, chdir: dir.to_s)
+def run(cmd, args, dir)
+  env = {"CRYSTAL_WORKERS" => System.cpu_count.to_s, "MIX_ENV" => "prod", "MIX_QUIET" => "1", "PORT" => "8000"}
+  p = Process.new(cmd, env: env, args: args, input: Process::Redirect::Inherit, output: Process::Redirect::Inherit, error: Process::Redirect::Inherit, chdir: dir.to_s)
   at_exit { p.terminate unless p.terminated? }
   p
 end

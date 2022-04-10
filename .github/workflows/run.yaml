@@ -9,43 +9,43 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - run: sudo apt-get update # act
-    - run: sudo apt-get install -y psmisc
-    - run: curl -fsSL https://crystal-lang.org/install.sh | sudo bash
-    # broken on act
-    #- uses: crystal-lang/install-crystal@v1
-    - uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 2.7
-    - uses: cachix/install-nix-action@v17
-      with:
-        nix_path: nixpkgs=channel:nixos-unstable
-    - uses: actions/cache@v3
-      with:
-        path: |
-          ~/.ivy2/cache
-          ~/.sbt
-        key: ${{ runner.os }}-sbt-${{ hashFiles('**/build.sbt') }}
-    - uses: actions/cache@v3
-      with:
-        path: |
-          ~/.cargo/bin/
-          ~/.cargo/registry/index/
-          ~/.cargo/registry/cache/
-          ~/.cargo/git/db/
-          async-graphql/target
-          juniper/target
-        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-    - uses: actions/cache@v3
-      with:
-        path: ~/.local/share/virtualenvs
-        key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
-    - uses: actions/cache@v3
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-    - name: Install dependencies
-      run: nix-env -f '<nixpkgs>' -iA wrk rustc cargo go nodejs nodePackages.npm dotnet-sdk openjdk sbt python3Full pipenv cmake # ruby bundler
-    - name: Run benchmarks
-      run: crystal run.cr
+      - uses: actions/checkout@v3
+      - run: sudo apt-get update # act
+      - run: sudo apt-get install -y psmisc
+      - run: curl -fsSL https://crystal-lang.org/install.sh | sudo bash
+      # broken on act
+      #- uses: crystal-lang/install-crystal@v1
+      - uses: cachix/install-nix-action@v17
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.ivy2/cache
+            ~/.sbt
+          key: ${{ runner.os }}-sbt-${{ hashFiles('**/build.sbt') }}
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            async-graphql/target
+            juniper/target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - uses: actions/cache@v3
+        with:
+          path: ~/.local/share/virtualenvs
+          key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
+      - uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies
+        run: |
+          nix-env -f '<nixpkgs>' -iA wrk rustc cargo go nodejs nodePackages.npm dotnet-sdk openjdk sbt python3Full pipenv cmake elixir ruby
+          mix local.hex --force
+          mix local.rebar --force
+      - name: Run benchmarks
+        run: crystal run.cr

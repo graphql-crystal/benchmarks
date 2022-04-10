@@ -16,4 +16,6 @@ ENV USER=vscode
 
 RUN bash -c "sh <(curl -L https://releases.nixos.org/nix/nix-2.6.1/install) --no-daemon" \
   && . /home/vscode/.nix-profile/etc/profile.d/nix.sh \
-  && nix-env -iA -f '<nixpkgs>' wrk rustc cargo go nodejs nodePackages.npm dotnet-sdk nim openjdk sbt python3Full pipenv bundler ruby cmake
+  && nix-channel --add https://nixos.org/channels/nixos-unstable \
+  && nix-channel --update \
+  && nix-env -iA -f '<nixos>' wrk rustc cargo go nodejs nodePackages.npm dotnet-sdk nim openjdk sbt python3Full pipenv ruby cmake elixir
