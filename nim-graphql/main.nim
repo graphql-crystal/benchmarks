@@ -2,7 +2,9 @@ import
   std/[os, strutils], chronos, chronicles,
   graphql, graphql/httpserver
 
-proc queryHello(ud: RootRef, params: Args, parent: Node): RespResult =
+{.pragma: apiPragma, cdecl, gcsafe, raises: [Defect, CatchableError].}
+
+proc queryHello(ud: RootRef, params: Args, parent: Node): RespResult {.apiPragma.} =
   return ok(resp("world"))
 
 const queryProcs = {
@@ -13,8 +15,6 @@ type Query = ref object of RootRef
   hello: string
 
 proc loadSchema(ctx: GraphqlRef): GraphqlResult =
-  notice "loading graphql api"
-
   var conf = defaultParserConf()
   conf.flags.incl pfCommentDescription
 
@@ -24,9 +24,6 @@ proc loadSchema(ctx: GraphqlRef): GraphqlResult =
   ctx.parseSchemaFromFile("schema.graphql")
 
 proc main() =
-  var message: string
-  ## Processing command line arguments
-
   let socketFlags = {ServerFlags.TcpNoDelay, ServerFlags.ReuseAddr}
   var ctx = GraphqlRef.new()
 
@@ -36,7 +33,7 @@ proc main() =
     return
 
   let sres = GraphqlHttpServerRef.new(ctx,
-                 address = "127.0.0.1:8000",
+                 address = initTAddress("127.0.0.1:8000"),
                  socketFlags = socketFlags)
 
   if sres.isErr():

@@ -14,6 +14,7 @@ b = [
   {"graphql-jit", "node", ["index.js"]},
   {"graphql-js", "node", ["index.js"]},
   {"mercurius", "node", ["index.js"]},
+  {"nim-graphql", "./main", nil},
   {"graphql-ruby", "puma", ["-w", System.cpu_count.to_s, "-s", "-t", "2", "-b", "tcp://127.0.0.1:8000"]},
   {"graphql-yoga", "node", ["--no-warnings", "index.js"]},
   {"hotchocolate", "dotnet", ["run", "-c", "Release", "-v", "quiet", "--nologo"]},
@@ -21,7 +22,7 @@ b = [
   {"sangria", "java", ["-Xrs", "-Xmx4G", "-jar", "./target/scala-2.13/sangria-assembly-0.1.0-SNAPSHOT.jar"]},
   {"static", "./main", nil},
   {"strawberry", "pipenv", ["run", "--", "gunicorn", "--log-level", "warning", "-w", System.cpu_count.to_s, "-b", "127.0.0.1:8000", "app:app"]},
-  # {"tartiflette", "pipenv", ["run", "--", "python", "app.py"]},
+  {"tartiflette", "pipenv", ["run", "--", "python", "app.py"]},
 ]
 
 shards_mut = Mutex.new
@@ -44,6 +45,8 @@ b.each do |b|
     wait_p run("bundle", ["install", "--quiet"], dir) if File.exists? dir.join("Gemfile")
     wait_p run("mix", ["deps.get", "--only", "prod"], dir) if File.exists? dir.join("mix.exs")
     wait_p run("mix", ["compile"], dir) if File.exists? dir.join("mix.exs")
+    wait_p run("nimble", ["--silent", "-y", "install"], dir) if File.exists? dir.join("main.nimble")
+    wait_p run("nimble", ["--silent", "-y", "build", "-d:release", "-d:chronicles_log_level=WARN"], dir) if File.exists? dir.join("main.nimble")
     ch.send(nil)
   rescue ex
     puts ex.message

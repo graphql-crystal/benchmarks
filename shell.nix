@@ -21,6 +21,7 @@ pkgs.mkShell {
     elixir
     ruby
     psmisc
+    nim
     #crystal # broken undefined reference to `GC_get_my_stackbottom'
   ];
 

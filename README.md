@@ -22,8 +22,8 @@ The API is served over HTTP using a common web server and load tested using [wrk
 | [Juniper](https://github.com/graphql-rust/juniper)              | Rust     | Actix Web    | 38799        |
 | [gqlgen](https://github.com/99designs/gqlgen)                   | Go       | net/http     | 36264        |
 | [async-graphql](https://github.com/async-graphql/async-graphql) | Rust     | Actix Web    | 34492        |
-| [HotChocolate](https://github.com/ChilliCream/hotchocolate)     | C#       | ASP.NET Core | 28232        |
-| [mercurius](https://github.com/mercurius-js/mercurius)          | Node.js  | Fastify      | 19421        |
+| [Hot Chocolate](https://github.com/ChilliCream/hotchocolate)    | C#       | ASP.NET Core | 28232        |
+| [Mercurius](https://github.com/mercurius-js/mercurius)          | Node.js  | Fastify      | 19421        |
 | [graphql-go](https://github.com/graphql-go/graphql)             | Go       | net/http     | 11949        |
 | [agoo](https://github.com/ohler55/agoo)                         | Ruby/C   | agoo         | 9915         |
 | [graphql-jit](https://github.com/zalando-incubator/graphql-jit) | Node.js  | http         | 7702         |
@@ -34,5 +34,6 @@ The API is served over HTTP using a common web server and load tested using [wrk
 | [Sangria](https://github.com/sangria-graphql/sangria)           | Scala    | Akka HTTP    | 2152         |
 | [Graphene](https://github.com/graphql-python/graphene)          | Python   | gunicorn     | 1457         |
 | [Strawberry](https://github.com/strawberry-graphql/strawberry)  | Python   | gunicorn     | 1203         |
+| [nim-graphql](https://github.com/status-im/nim-graphql)         | Nim      | Chronos      |              |
 
 Results are updated sporadically. For the latest results, see [actions](https://github.com/graphql-crystal/benchmarks/actions/workflows/run.yaml).
