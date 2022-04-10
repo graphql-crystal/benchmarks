@@ -1,6 +1,7 @@
 { pkgs ? import <nixpkgs> { } }:
 pkgs.mkShell {
   nativeBuildInputs = with pkgs; [
+    stdenv.cc.cc.lib
     gmp
     libevent
     pcre
