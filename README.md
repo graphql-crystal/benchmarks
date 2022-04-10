@@ -34,4 +34,4 @@ The API is served over HTTP using a common web server and load tested using [wrk
 | [Strawberry](https://github.com/strawberry-graphql/strawberry)  | Python   | gunicorn     | 1153         |
 | [Absinthe](https://github.com/absinthe-graphql/absinthe)        | Elixir   | Phoenix      |              |
 
-Results are updated sporadically. For the latest results, see [actions](https://github.com/graphql-crystal/benchmarks/actions).
+Results are updated sporadically. For the latest results, see [actions](https://github.com/graphql-crystal/benchmarks/actions/workflows/run.yaml).

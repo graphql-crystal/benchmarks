@@ -14,4 +14,4 @@ USER vscode
 
 ENV USER=vscode
 
-RUN bash -c "sh <(curl -L https://releases.nixos.org/nix/nix-2.6.1/install) --no-daemon"
+RUN bash -c "sh <(curl -L https://releases.nixos.org/nix/nix-2.6.1/install) --no-daemon" && nix-env -i nixpkgs-fmt

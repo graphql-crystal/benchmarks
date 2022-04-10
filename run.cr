@@ -20,7 +20,7 @@ b = [
   {"sangria", "java", ["-Xrs", "-Xmx4G", "-jar", "./target/scala-2.13/sangria-assembly-0.1.0-SNAPSHOT.jar"]},
   {"static", "./main", nil},
   {"strawberry", "pipenv", ["run", "--", "gunicorn", "--log-level", "warning", "-w", System.cpu_count.to_s, "-b", "127.0.0.1:8000", "app:app"]},
-  {"tartiflette", "pipenv", ["run", "--", "python", "app.py"]},
+  # {"tartiflette", "pipenv", ["run", "--", "python", "app.py"]},
 ]
 
 shards_mut = Mutex.new
