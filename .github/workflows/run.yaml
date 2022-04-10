@@ -10,11 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: sudo apt-get update # act
-      - run: sudo apt-get install -y psmisc
-      - run: curl -fsSL https://crystal-lang.org/install.sh | sudo bash
-      # broken on act
-      #- uses: crystal-lang/install-crystal@v1
       - uses: cachix/install-nix-action@v17
         with:
           nix_path: nixpkgs=channel:nixos-unstable
@@ -44,8 +39,8 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
         run: |
-          nix-env -f '<nixpkgs>' -iA wrk rustc cargo go nodejs nodePackages.npm dotnet-sdk openjdk sbt python3Full pipenv cmake elixir ruby
-          mix local.hex --force
-          mix local.rebar --force
+          curl -fsSL https://crystal-lang.org/install.sh | sudo bash
+          nix-shell --quiet --run "mix local.hex --force"
+          nix-shell --quiet --run "mix local.rebar --force"
       - name: Run benchmarks
-        run: crystal run.cr
+        run: nix-shell --quiet --run ./run.cr

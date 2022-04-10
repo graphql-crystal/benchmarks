@@ -4,8 +4,8 @@ require "http"
 require "json"
 
 b = [
+  {"agoo", "ruby", ["main.rb"]}, # should be alphabetical but agoo must come first or it will say adress in use
   {"absinthe", "mix", ["phx.server"]},
-  {"agoo", "ruby", ["main.rb"]},
   {"async-graphql", "./target/release/async-graphql", nil},
   {"gqlgen", "./main", nil},
   {"graphene", "pipenv", ["run", "--", "gunicorn", "--log-level", "warning", "-w", System.cpu_count.to_s, "-b", "127.0.0.1:8000", "app:app"]},
@@ -20,8 +20,7 @@ b = [
   {"sangria", "java", ["-Xrs", "-Xmx4G", "-jar", "./target/scala-2.13/sangria-assembly-0.1.0-SNAPSHOT.jar"]},
   {"static", "./main", nil},
   {"strawberry", "pipenv", ["run", "--", "gunicorn", "--log-level", "warning", "-w", System.cpu_count.to_s, "-b", "127.0.0.1:8000", "app:app"]},
-  # libgraphqlparser fails to load and idk why
-  # {"tartiflette", "pipenv", ["run", "--", "python", "app.py"]},
+  {"tartiflette", "pipenv", ["run", "--", "python", "app.py"]},
 ]
 
 shards_mut = Mutex.new
@@ -61,12 +60,13 @@ b.each do |b|
     raise "port 8000 already in use" unless wait_unbound 60
     puts "killed socket process"
   end
+
   puts "--- #{b[0]}"
 
   p = run(b[1], b[2], Path[Dir.current, b[0]])
 
   while !port_bound?
-    raise "fail" if p.terminated?
+    exit 1 if p.terminated?
     sleep 1
   end
 
@@ -78,7 +78,7 @@ b.each do |b|
   end
 
   if !system("wrk -t#{System.cpu_count} -c#{System.cpu_count * 50} -d10s --script=post.lua --latency http://127.0.0.1:8000/graphql")
-    raise "fail"
+    exit 1
   end
   p.terminate
   wait_p p

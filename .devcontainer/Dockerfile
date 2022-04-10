@@ -5,7 +5,7 @@ ARG VARIANT="buster"
 FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
 
 RUN apt-get update \
-  && apt-get install -y libgit2-dev xz-utils build-essential \
+  && apt-get install -y libgit2-dev xz-utils \
   && curl -fsSL https://crystal-lang.org/install.sh | bash \
   && mkdir -p /etc/nix \
   && bash -c "printf \"sandbox = false\" > /etc/nix/nix.conf"
@@ -14,8 +14,4 @@ USER vscode
 
 ENV USER=vscode
 
-RUN bash -c "sh <(curl -L https://releases.nixos.org/nix/nix-2.6.1/install) --no-daemon" \
-  && . /home/vscode/.nix-profile/etc/profile.d/nix.sh \
-  && nix-channel --add https://nixos.org/channels/nixos-unstable \
-  && nix-channel --update \
-  && nix-env -iA -f '<nixos>' wrk rustc cargo go nodejs nodePackages.npm dotnet-sdk nim openjdk sbt python3Full pipenv ruby cmake elixir
+RUN bash -c "sh <(curl -L https://releases.nixos.org/nix/nix-2.6.1/install) --no-daemon"

@@ -4,6 +4,7 @@ GEM
     agoo (2.14.2)
 
 PLATFORMS
+  ruby
   x86_64-linux
 
 DEPENDENCIES

@@ -19,7 +19,8 @@
     "scala-lang.scala",
     "scalameta.metals",
     "esbenp.prettier-vscode",
-    "mjmcloug.vscode-elixir"
+    "mjmcloug.vscode-elixir",
+    "jnoortheen.nix-ide"
   ],
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
