@@ -5,6 +5,9 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - README.md
+
 jobs:
   run:
     runs-on: ubuntu-latest
@@ -44,3 +47,10 @@ jobs:
           nix-shell --quiet --run "mix local.rebar --force"
       - name: Run benchmarks
         run: nix-shell --quiet --run ./run.cr
+      - name: Push readme
+        run: |
+          git config --global user.name "Jakob Gillich"
+          git config --global user.email "jakob@gillich.me"
+          git add README.md
+          git commit -m "update readme"
+          git push
