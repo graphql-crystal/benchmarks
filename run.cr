@@ -130,8 +130,9 @@ class Benchmark
     @metrics.not_nil!.["http_reqs"]["values"]["rate"].as_f.round(2)
   end
 
-  def lat
+  def latency
     v = @metrics.not_nil!.["http_req_duration"]["values"]
-    "#{v["avg"].as_f.round(2)}/#{v["min"].as_f.round(2)}/#{v["med"].as_f.round(2)}/#{v["max"].as_f.round(2)}"
+    # "#{v["avg"].as_f.round(2)}/#{v["min"].as_f.round(2)}/#{v["med"].as_f.round(2)}/#{v["max"].as_f.round(2)}"
+    v["avg"].as_f.round(2)
   end
 end
