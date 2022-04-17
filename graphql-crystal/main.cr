@@ -24,9 +24,4 @@ end
 logging false
 Kemal.config.port = 8000
 
-Signal::TERM.trap do
-  Kemal.stop
-  exit
-end
-
 Kemal.run
