@@ -158,8 +158,8 @@
 - id: strawberry
   name: Strawberry
   url: https://github.com/strawberry-graphql/strawberry
-  lang: Scala
-  server: Akka HTTP
+  lang: Python
+  server: gunicorn
   run:
     cmd: pipenv
     args:

@@ -67,8 +67,9 @@ end
 benchmarks = benchmarks.sort do |a, b|
   b.metrics.not_nil!.["http_reqs"]["values"]["rate"].as_f <=> a.metrics.not_nil!.["http_reqs"]["values"]["rate"].as_f
 end
-File.write "README.md", ECR.render("README.ecr")
-puts "done"
+readme = ECR.render("README.ecr")
+File.write "README.md", readme
+puts readme
 
 def run(cmd, args, dir)
   env = {"CRYSTAL_WORKERS" => System.cpu_count.to_s, "MIX_ENV" => "prod", "MIX_QUIET" => "1", "PORT" => "8000"}
@@ -127,12 +128,11 @@ class Benchmark
   property metrics : JSON::Any?
 
   def reqs
-    @metrics.not_nil!.["http_reqs"]["values"]["rate"].as_f.round(2)
+    "#{@metrics.not_nil!.["http_reqs"]["values"]["rate"].as_f.humanize(2)}/s"
   end
 
   def latency
     v = @metrics.not_nil!.["http_req_duration"]["values"]
-    # "#{v["avg"].as_f.round(2)}/#{v["min"].as_f.round(2)}/#{v["med"].as_f.round(2)}/#{v["max"].as_f.round(2)}"
-    v["avg"].as_f.round(2)
+    "#{v["avg"].as_f.humanize(0)} ms"
   end
 end

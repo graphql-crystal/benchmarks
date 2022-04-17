@@ -18,8 +18,8 @@ The API is served over HTTP using a common web server and load tested using [k6]
 
 ### Results
 
-| Name                          | Language      | Server          | Requests/s    | Latency avg      |
-| ----------------------------  | ------------- | --------------- | ------------- | ---------------- |
+| Name                          | Language      | Server          | Latency avg      | Requests      |
+| ----------------------------  | ------------- | --------------- | ---------------- | ------------- |
 <%- benchmarks.each do |b| -%>
-| [<%= b.name %>](<%= b.url %>) | <%= b.lang %> | <%= b.server %> | <%= b.reqs %> | <%= b.latency %> |
+| [<%= b.name %>](<%= b.url %>) | <%= b.lang %> | <%= b.server %> | <%= b.latency %> | <%= b.reqs %> |
 <%- end -%>
