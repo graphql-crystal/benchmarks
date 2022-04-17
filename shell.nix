@@ -1,12 +1,13 @@
 { pkgs ? import <nixpkgs> { } }:
 pkgs.mkShell {
   nativeBuildInputs = with pkgs; [
+    k6
+    libyaml
     gmp
     libevent
     pcre
     zlib
     openssl
-    wrk
     rustc
     cargo
     go

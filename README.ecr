@@ -1,0 +1,25 @@
+<!-- README.md is generated from README.ecr, do not edit -->
+
+# GraphQL server benchmarks
+
+Graphql server benchmarks in many languages. Pull requests welcome.
+
+All servers implement a simple schema:
+
+```graphql
+type Query {
+  hello: String!
+}
+```
+
+The returned string is always `world`.
+
+The API is served over HTTP using a common web server and load tested using [k6](https://github.com/grafana/k6).
+
+### Results
+
+| Name                                                            | Language | Server       | Req/s | Latency avg/min/med/max |
+| --------------------------------------------------------------- | -------- | ------------ | ----- | ----------------------- |
+<%- benchmarks.each do |b| -%>
+| [<%= b.name %>](<%= b.url %>) | <%= b.lang %> | <%= b.server %> | <%= b.reqs %> | <%= b.lat %> |
+<%- end -%>
