@@ -128,11 +128,11 @@ class Benchmark
   property metrics : JSON::Any?
 
   def reqs
-    "#{@metrics.not_nil!.["http_reqs"]["values"]["rate"].as_f.humanize(2)}/s"
+    "#{@metrics.not_nil!.["http_reqs"]["values"]["rate"].as_f.humanize(2)}ps"
   end
 
   def latency
     v = @metrics.not_nil!.["http_req_duration"]["values"]
-    "#{v["avg"].as_f.humanize(0)} ms"
+    "#{v["avg"].as_f.format(decimal_places: 2)}ms"
   end
 end
