@@ -20,20 +20,20 @@ The API is served over HTTP using a common web server and load tested using [k6]
 
 | Name                          | Language      | Server          | Latency avg      | Requests      |
 | ----------------------------  | ------------- | --------------- | ---------------- | ------------- |
-| [graphql-crystal](https://github.com/graphql-crystal/graphql) | Crystal | Kemal | 9.08ms | 11kps |
-| [async-graphql](https://github.com/async-graphql/async-graphql) | Rust | Actix Web | 9.80ms | 9.9kps |
-| [Juniper](https://github.com/graphql-rust/juniper) | Rust | Actix Web | 9.91ms | 9.8kps |
-| [nim-graphql](https://github.com/status-im/nim-graphql) | Nim | Chronos | 11.01ms | 9.0kps |
-| [agoo](https://github.com/ohler55/agoo) | Ruby/C | agoo | 12.30ms | 8.0kps |
-| [gqlgen](https://github.com/99designs/gqlgen) | Go | net/http | 12.41ms | 7.9kps |
-| [Mercurius](https://github.com/mercurius-js/mercurius) | Node.js | Fastify | 14.24ms | 6.9kps |
-| [graphql-go](https://github.com/graphql-go/graphql) | Go | net/http | 14.79ms | 6.7kps |
-| [Hot Chocolate](https://github.com/ChilliCream/hotchocolate) | C# | ASP.NET | 15.26ms | 6.5kps |
-| [graphql-yoga](https://github.com/dotansimha/graphql-yoga) | Node.js | http | 19.90ms | 5.0kps |
-| [graphql-jit](https://github.com/zalando-incubator/graphql-jit) | Node.js | http | 26.77ms | 3.7kps |
-| [Absinthe](https://github.com/absinthe-graphql/absinthe) | Elixir | Phoenix | 32.35ms | 3.1kps |
-| [graphql-js](https://github.com/graphql/graphql-js) | Node.js | http | 47.07ms | 2.1kps |
-| [Sangria](https://github.com/sangria-graphql/sangria) | Scala | Akka HTTP | 66.90ms | 1.5kps |
-| [graphql-ruby](https://github.com/rmosolgo/graphql-ruby) | Ruby | Puma | 57.87ms | 1.4kps |
-| [Graphene](https://github.com/graphql-python/graphene) | Python | gunicorn | 93.65ms | 1.1kps |
-| [Strawberry](https://github.com/strawberry-graphql/strawberry) | Python | gunicorn | 110.30ms | 900ps |
+| [graphql-crystal](https://github.com/graphql-crystal/graphql) | Crystal | Kemal | 13.23ms | 7.4kps |
+| [Juniper](https://github.com/graphql-rust/juniper) | Rust | Actix Web | 15.04ms | 6.5kps |
+| [async-graphql](https://github.com/async-graphql/async-graphql) | Rust | Actix Web | 15.26ms | 6.5kps |
+| [nim-graphql](https://github.com/status-im/nim-graphql) | Nim | Chronos | 16.16ms | 6.1kps |
+| [gqlgen](https://github.com/99designs/gqlgen) | Go | net/http | 19.05ms | 5.1kps |
+| [agoo](https://github.com/ohler55/agoo) | Ruby/C | agoo | 19.64ms | 5.0kps |
+| [Mercurius](https://github.com/mercurius-js/mercurius) | Node.js | Fastify | 20.22ms | 4.9kps |
+| [graphql-go](https://github.com/graphql-go/graphql) | Go | net/http | 21.35ms | 4.6kps |
+| [Hot Chocolate](https://github.com/ChilliCream/hotchocolate) | C# | ASP.NET | 23.15ms | 4.2kps |
+| [graphql-yoga](https://github.com/dotansimha/graphql-yoga) | Node.js | http | 32.30ms | 3.1kps |
+| [graphql-jit](https://github.com/zalando-incubator/graphql-jit) | Node.js | http | 39.61ms | 2.5kps |
+| [Absinthe](https://github.com/absinthe-graphql/absinthe) | Elixir | Phoenix | 43.46ms | 2.3kps |
+| [graphql-js](https://github.com/graphql/graphql-js) | Node.js | http | 65.22ms | 1.5kps |
+| [graphql-ruby](https://github.com/rmosolgo/graphql-ruby) | Ruby | Puma | 72.85ms | 1.1kps |
+| [Sangria](https://github.com/sangria-graphql/sangria) | Scala | Akka HTTP | 98.83ms | 1,000ps |
+| [Graphene](https://github.com/graphql-python/graphene) | Python | gunicorn | 119.99ms | 830ps |
+| [Strawberry](https://github.com/strawberry-graphql/strawberry) | Python | gunicorn | 134.41ms | 740ps |
