@@ -48,6 +48,7 @@ jobs:
       - name: Run benchmarks
         run: nix-shell --quiet --run ./run.cr
       - name: Push readme
+        if: ${{ github.event_name == 'push' }}
         run: |
           git config --global user.name "Jakob Gillich"
           git config --global user.email "jakob@gillich.me"
