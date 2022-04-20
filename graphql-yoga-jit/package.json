@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@graphql-yoga/node": "^2.3.0",
+    "@envelop/graphql-jit": "^4.2.1"
+  },
+  "type": "module"
+}

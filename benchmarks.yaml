@@ -119,6 +119,14 @@
   run:
     cmd: node
     args: ["--no-warnings", "index.js"]
+- id: graphql-yoga-jit
+  name: graphql-yoga-jit
+  url: https://github.com/dotansimha/graphql-yoga
+  lang: Node.js
+  server: http
+  run:
+    cmd: node
+    args: ["--no-warnings", "index.js"]
 - id: hotchocolate
   name: Hot Chocolate
   url: https://github.com/ChilliCream/hotchocolate
