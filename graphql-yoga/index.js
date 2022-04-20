@@ -1,6 +1,7 @@
 import cluster from 'cluster'
 import {cpus} from 'os'
 import { createServer } from '@graphql-yoga/node'
+import { useGraphQlJit } from '@envelop/graphql-jit'
 
 process.env.PORT = "8000"
 
@@ -22,7 +23,8 @@ if (cluster.isPrimary) {
         }
       }
     },
-    logging: false,
+    plugins: [useGraphQlJit()],
+    logging: false
   })
 
   server.start()
