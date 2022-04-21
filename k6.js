@@ -15,9 +15,10 @@ export default function () {
       headers: { "Content-Type": "application/json" },
     }
   );
-  check(res, {
-    "expected result": (r) => r.json().data.hello == "world",
-  });
+  //check(res, {
+  //  "is status 200": (r) => r.status === 200,
+  //  "expected result": (r) => r.json().data.hello == "world",
+  //});
 }
 
 export function handleSummary(data) {
