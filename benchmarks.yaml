@@ -119,6 +119,14 @@
   run:
     cmd: node
     args: ["--no-warnings", "index.js"]
+- id: apollo
+  name: apollo
+  url: https://github.com/apollographql/apollo-server
+  lang: Node.js
+  server: Express
+  run:
+    cmd: node
+    args: ["--no-warnings", "index.js"]
 - id: hotchocolate
   name: Hot Chocolate
   url: https://github.com/ChilliCream/hotchocolate
