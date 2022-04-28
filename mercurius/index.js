@@ -24,6 +24,7 @@ if (cluster.isPrimary) {
   app.register(mercurius, {
     schema,
     resolvers,
+    jit: 1
   });
 
   app.listen(8000);
