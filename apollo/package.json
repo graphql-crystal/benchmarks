@@ -1,6 +1,6 @@
 {
   "dependencies": {
-      "apollo-server": "~3.6.7"
+      "apollo-server": "~3.7.0"
   },
   "type": "module"
 }
