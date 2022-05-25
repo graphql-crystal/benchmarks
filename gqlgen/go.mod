@@ -3,7 +3,7 @@ module github.com/graphql-crystal/benchmarks/gqlgen
 go 1.18
 
 require (
-	github.com/99designs/gqlgen v0.17.7
+	github.com/99designs/gqlgen v0.17.8
 	github.com/vektah/gqlparser/v2 v2.4.3
 )
 
