@@ -8,8 +8,3 @@ graphene = ">=3.0"
 graphql-server = "*"
 gunicorn = "*"
 Flask = "*"
-
-[dev-packages]
-
-[requires]
-python_version = "3.9"
