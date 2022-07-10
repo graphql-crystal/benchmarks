@@ -55,9 +55,9 @@ dependencies = [
 
 [[package]]
 name = "actix-http"
-version = "3.0.4"
+version = "3.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a5885cb81a0d4d0d322864bea1bb6c2a8144626b4fdc625d4c51eba197e7797a"
+checksum = "6f9ffb6db08c1c3a1f4aef540f1a63193adc73c4fbd40b75a95fc8c5258f6e51"
 dependencies = [
  "actix-codec",
  "actix-rt",
@@ -80,13 +80,13 @@ dependencies = [
  "itoa",
  "language-tags",
  "local-channel",
- "log",
  "mime",
  "percent-encoding",
  "pin-project-lite",
  "rand",
- "sha-1 0.10.0",
+ "sha1",
  "smallvec",
+ "tracing",
  "zstd",
 ]
 
@@ -316,9 +316,9 @@ version = "3.0.37"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1fff26a58e85256388bc67a2c6373d9876978f11d912051e8a2b1caf6bb46ff6"
 dependencies = [
- "async-graphql-derive",
- "async-graphql-parser",
- "async-graphql-value",
+ "async-graphql-derive 3.0.37",
+ "async-graphql-parser 3.0.37",
+ "async-graphql-value 3.0.37",
  "async-stream",
  "async-trait",
  "bytes",
@@ -341,17 +341,46 @@ dependencies = [
 ]
 
 [[package]]
-name = "async-graphql-actix-web"
-version = "3.0.37"
+name = "async-graphql"
+version = "4.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6937aa9ad76f8a5b8ab30d607515666434d8f854b4bbeb805f7f988eaff7063b"
+checksum = "ffffea596a12b6d9ea5c6fc8a5f414cf4e0c8cd6b618ac2c3d4f56d9b5c5520b"
+dependencies = [
+ "async-graphql-derive 4.0.4",
+ "async-graphql-parser 4.0.4",
+ "async-graphql-value 4.0.4",
+ "async-stream",
+ "async-trait",
+ "bytes",
+ "fnv",
+ "futures-util",
+ "http",
+ "indexmap",
+ "mime",
+ "multer",
+ "num-traits",
+ "once_cell",
+ "pin-project-lite",
+ "regex",
+ "serde",
+ "serde_json",
+ "static_assertions",
+ "tempfile",
+ "thiserror",
+]
+
+[[package]]
+name = "async-graphql-actix-web"
+version = "4.0.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "efa4e7d1a4bc86b2f9bad704aefb1493c2eb6edb52706dad3f9551c148e4c284"
 dependencies = [
  "actix",
  "actix-http",
  "actix-web",
  "actix-web-actors",
  "async-channel",
- "async-graphql 3.0.37",
+ "async-graphql 4.0.4",
  "futures-channel",
  "futures-util",
  "serde_json",
@@ -366,8 +395,24 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "447958447d3ed56f4f01618b240cae4d47f04bffd81b576bf3942a06e573f017"
 dependencies = [
  "Inflector",
- "async-graphql-parser",
- "darling",
+ "async-graphql-parser 3.0.37",
+ "darling 0.13.4",
+ "proc-macro-crate",
+ "proc-macro2",
+ "quote",
+ "syn",
+ "thiserror",
+]
+
+[[package]]
+name = "async-graphql-derive"
+version = "4.0.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7082221cc1dc29edec0e3225420146b1fbc7f18ba534e301eab186501ae84c28"
+dependencies = [
+ "Inflector",
+ "async-graphql-parser 4.0.4",
+ "darling 0.14.1",
  "proc-macro-crate",
  "proc-macro2",
  "quote",
@@ -381,9 +426,21 @@ version = "3.0.37"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9b6852c0e92b7fad08753d5fb23e6528db21c088d4423f85669c8ced7c5ec6e1"
 dependencies = [
- "async-graphql-value",
+ "async-graphql-value 3.0.37",
  "pest",
  "pest_derive",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "async-graphql-parser"
+version = "4.0.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c328e2cb0dade64333859f7a7e22c9e19a3767afaad673976a1d855c9bda5ffa"
+dependencies = [
+ "async-graphql-value 4.0.4",
+ "pest",
  "serde",
  "serde_json",
 ]
@@ -393,6 +450,18 @@ name = "async-graphql-value"
 version = "3.0.37"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e094427865a6fe74867767a9d48423ee079bd660cb3013031ff74f815dc97690"
+dependencies = [
+ "bytes",
+ "indexmap",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "async-graphql-value"
+version = "4.0.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "005292494ce718604a0dc1531e5827fe540761e1df44b064085711c5fde70b7c"
 dependencies = [
  "bytes",
  "indexmap",
@@ -632,8 +701,18 @@ version = "0.13.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a01d95850c592940db9b8194bc39f4bc0e89dee5c4265e4b1807c34a9aba453c"
 dependencies = [
- "darling_core",
- "darling_macro",
+ "darling_core 0.13.4",
+ "darling_macro 0.13.4",
+]
+
+[[package]]
+name = "darling"
+version = "0.14.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4529658bdda7fd6769b8614be250cdcfc3aeb0ee72fe66f9e41e5e5eb73eac02"
+dependencies = [
+ "darling_core 0.14.1",
+ "darling_macro 0.14.1",
 ]
 
 [[package]]
@@ -651,12 +730,37 @@ dependencies = [
 ]
 
 [[package]]
+name = "darling_core"
+version = "0.14.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "649c91bc01e8b1eac09fb91e8dbc7d517684ca6be8ebc75bb9cafc894f9fdb6f"
+dependencies = [
+ "fnv",
+ "ident_case",
+ "proc-macro2",
+ "quote",
+ "strsim",
+ "syn",
+]
+
+[[package]]
 name = "darling_macro"
 version = "0.13.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9c972679f83bdf9c42bd905396b6c3588a843a17f0f16dfcfa3e2c5d57441835"
 dependencies = [
- "darling_core",
+ "darling_core 0.13.4",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "darling_macro"
+version = "0.14.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ddfc69c5bfcbd2fc09a0f38451d2daf0e372e367986a83906d1b0dbc88134fb5"
+dependencies = [
+ "darling_core 0.14.1",
  "quote",
  "syn",
 ]
@@ -1208,7 +1312,7 @@ checksum = "54be6e404f5317079812fc8f9f5279de376d8856929e21c184ecf6bbd692a11d"
 dependencies = [
  "maplit",
  "pest",
- "sha-1 0.8.2",
+ "sha-1",
 ]
 
 [[package]]
@@ -1241,18 +1345,18 @@ dependencies = [
 
 [[package]]
 name = "proc-macro2"
-version = "1.0.37"
+version = "1.0.40"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ec757218438d5fda206afc041538b2f6d889286160d649a86a24d37e1235afd1"
+checksum = "dd96a1e8ed2596c337f8eae5f24924ec83f5ad5ab21ea8e455d3566c69fbcaf7"
 dependencies = [
- "unicode-xid",
+ "unicode-ident",
 ]
 
 [[package]]
 name = "quote"
-version = "1.0.17"
+version = "1.0.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "632d02bff7f874a36f33ea8bb416cd484b90cc66c1194b1a1110d067a7013f58"
+checksum = "3bcdf212e9776fbcb2d23ab029360416bb1706b1aea2d1a5ba002727cbcab804"
 dependencies = [
  "proc-macro2",
 ]
@@ -1405,10 +1509,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "sha-1"
-version = "0.10.0"
+name = "sha1"
+version = "0.10.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "028f48d513f9678cda28f6e4064755b3fbb2af6acd672f2c209b62323f7aea0f"
+checksum = "c77f4e7f65455545c2153c1253d25056825e77ee2533f0e41deb65a93a34852f"
 dependencies = [
  "cfg-if",
  "cpufeatures",
@@ -1635,6 +1739,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1a01404663e3db436ed2746d9fefef640d868edae3cceb81c3b8d5732fda678f"
 
 [[package]]
+name = "unicode-ident"
+version = "1.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5bd2fe26506023ed7b5e1e315add59d6f584c621d037f9368fea9cfb988f368c"
+
+[[package]]
 name = "unicode-normalization"
 version = "0.1.19"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1746,18 +1856,18 @@ checksum = "d19538ccc21819d01deaf88d6a17eae6596a12e9aafdbb97916fb49896d89de9"
 
 [[package]]
 name = "zstd"
-version = "0.10.0+zstd.1.5.2"
+version = "0.11.2+zstd.1.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3b1365becbe415f3f0fcd024e2f7b45bacfb5bdd055f0dc113571394114e7bdd"
+checksum = "20cc960326ece64f010d2d2107537f26dc589a6573a316bd5b1dba685fa5fde4"
 dependencies = [
  "zstd-safe",
 ]
 
 [[package]]
 name = "zstd-safe"
-version = "4.1.4+zstd.1.5.2"
+version = "5.0.2+zstd.1.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2f7cd17c9af1a4d6c24beb1cc54b17e2ef7b593dc92f19e9d9acad8b182bbaee"
+checksum = "1d2a5585e04f9eea4b2a3d1eca508c4dee9592a89ef6f450c11719da0726f4db"
 dependencies = [
  "libc",
  "zstd-sys",
@@ -1765,9 +1875,9 @@ dependencies = [
 
 [[package]]
 name = "zstd-sys"
-version = "1.6.3+zstd.1.5.2"
+version = "2.0.1+zstd.1.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fc49afa5c8d634e75761feda8c592051e7eeb4683ba827211eb0d731d3402ea8"
+checksum = "9fd07cbbc53846d9145dbffdf6dd09a7a0aa52be46741825f5c97bdd4f73f12b"
 dependencies = [
  "cc",
  "libc",
