@@ -156,13 +156,13 @@
         "-jar",
         "./target/scala-2.13/sangria-assembly-0.1.0-SNAPSHOT.jar",
       ]
-#- id: static
-#  name: Static
-#  url: "#"
-#  lang: Crystal
-#  server: Kemal
-#  run:
-#    cmd: ./main
+- id: static-rust
+  name: static-rust
+  url: "https://actix.rs/"
+  lang: Rust
+  server: Actix Web
+  run:
+    cmd: ./target/release/static-rust
 - id: strawberry
   name: Strawberry
   url: https://github.com/strawberry-graphql/strawberry

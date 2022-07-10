@@ -1,16 +1,10 @@
-require "kemal"
+require "http/server"
+require "json"
 
-post "/graphql" do |env|
-  env.response.content_type = "application/json"
-  %({"data":{"hello":"world"}})
+server = HTTP::Server.new do |context|
+  context.response.headers["Content-Type"] = "application/json"
+  context.response.print({"data" => {"hello" => "world"}}.to_json)
 end
 
-logging false
-Kemal.config.port = 8000
-
-Signal::TERM.trap do
-  Kemal.stop
-  exit
-end
-
-Kemal.run
+server.bind_tcp 8000
+server.listen

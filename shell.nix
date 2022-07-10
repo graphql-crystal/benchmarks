@@ -1,7 +1,6 @@
 { pkgs ? import <nixpkgs> { } }:
 pkgs.mkShell {
   nativeBuildInputs = with pkgs; [
-    k6
     libyaml
     gmp
     libevent
@@ -28,6 +27,7 @@ pkgs.mkShell {
 
   shellHook = ''
     export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
-    export PATH="$PATH:$GEM_HOME/bin"
+    export PATH="$PATH:$GEM_HOME/bin:$HOME/go/bin"
+    go install github.com/codesenberg/bombardier@latest
   '';
 }

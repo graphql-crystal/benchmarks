@@ -55,17 +55,17 @@ benchmarks.each_with_index do |b, i|
     sleep 1
   end
 
-  res = `k6 run -q -d 10s --vus #{System.cpu_count * 50} k6.js`
+  res = `bombardier -c #{System.cpu_count * 25} -d 5s -m POST -b '{"query":"{ hello }"}' -H "Content-Type: application/json" -o json -p r  http://localhost:8000/graphql`
   exit 1 unless $?.success?
 
   p.terminate
   wait_p p
 
-  benchmarks[i].metrics = JSON.parse(res.split('\n').last)["metrics"]
+  benchmarks[i].result = JSON.parse(res.split('\n').last)["result"]
 end
 
 benchmarks = benchmarks.sort do |a, b|
-  b.metrics.not_nil!.["http_reqs"]["values"]["rate"].as_f <=> a.metrics.not_nil!.["http_reqs"]["values"]["rate"].as_f
+  b.result.not_nil!.["rps"]["mean"].as_f <=> a.result.not_nil!.["rps"]["mean"].as_f
 end
 readme = ECR.render("README.ecr")
 File.write "README.md", readme
@@ -125,14 +125,14 @@ class Benchmark
   property run : Script
 
   @[YAML::Field(ignore: true)]
-  property metrics : JSON::Any?
+  property result : JSON::Any?
 
   def reqs
-    "#{@metrics.not_nil!.["http_reqs"]["values"]["rate"].as_f.humanize(2)}ps"
+    "#{@result.not_nil!.["rps"]["mean"].as_f.humanize(2)}ps"
   end
 
   def latency
-    v = @metrics.not_nil!.["http_req_duration"]["values"]
-    "#{v["avg"].as_f.format(decimal_places: 2)}ms"
+    ms = @result.not_nil!.["latency"]["mean"].as_f / 1000
+    "#{ms.format(decimal_places: 2)}ms"
   end
 end
