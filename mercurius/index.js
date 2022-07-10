@@ -26,5 +26,5 @@ if (cluster.isPrimary) {
     resolvers,
   });
 
-  app.listen(8000);
+  app.listen({ port: 8000 });
 }
