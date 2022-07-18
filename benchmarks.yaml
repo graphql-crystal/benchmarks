@@ -29,6 +29,13 @@
   server: net/http
   run:
     cmd: ./main
+- id: graphql-go-fiber-sonic
+  name: graphql-go-fiber-sonic
+  url: https://github.com/graph-gophers/graphql-go
+  lang: Go
+  server: Fiber
+  run:
+    cmd: ./main
 - id: graphene
   name: Graphene
   url: https://github.com/graphql-python/graphene
