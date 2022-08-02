@@ -1,6 +1,6 @@
 module github.com/graphql-crystal/benchmarks/gqlgen
 
-go 1.18
+go 1.19
 
 require (
 	github.com/99designs/gqlgen v0.17.13
