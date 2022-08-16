@@ -2,7 +2,7 @@
   "dependencies": {
     "@graphql-tools/schema": "~8.5.0",
     "apollo-server-express": "~3.10.0",
-    "graphql": "~16.5.0",
+    "graphql": "~16.6.0",
     "graphql-jit": "~0.7.3"
   },
   "type": "module"
