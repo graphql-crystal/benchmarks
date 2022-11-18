@@ -87,13 +87,14 @@
   run:
     cmd: node
     args: ["index.js"]
-- id: nim-graphql
-  name: nim-graphql
-  url: https://github.com/status-im/nim-graphql
-  lang: Nim
-  server: Chronos
-  run:
-    cmd: ./main
+# https://github.com/NixOS/nixpkgs/issues/201456
+# - id: nim-graphql
+#   name: nim-graphql
+#   url: https://github.com/status-im/nim-graphql
+#   lang: Nim
+#   server: Chronos
+#   run:
+#     cmd: ./main
 - id: graphql-ruby
   name: graphql-ruby
   url: https://github.com/rmosolgo/graphql-ruby
@@ -156,6 +157,13 @@
         "-jar",
         "./target/scala-2.13/sangria-assembly-0.1.0-SNAPSHOT.jar",
       ]
+# - id: static-crystal
+#   name: static-crystal
+#   url: "https://actix.rs/"
+#   lang: Crystal
+#   server: Kemal
+#   run:
+#     cmd: ./main
 - id: static-rust
   name: static-rust
   url: "https://actix.rs/"

@@ -13,7 +13,7 @@ pkgs.mkShell {
     nodejs
     nodePackages.npm
     dotnet-sdk
-    openjdk
+    jdk
     sbt
     python3Full
     pipenv
@@ -29,5 +29,7 @@ pkgs.mkShell {
     export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
     export PATH="$PATH:$GEM_HOME/bin:$HOME/go/bin"
     go install github.com/codesenberg/bombardier@latest
+    mix local.hex --force
+    mix local.rebar --force
   '';
 }

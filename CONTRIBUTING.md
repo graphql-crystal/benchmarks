@@ -20,7 +20,7 @@ Most server environments provide multiple processor cores, and implementations s
 
 Running benchmarks requires [Crystal](https://crystal-lang.org/) and [Nix](https://nixos.org/). A configuration for the VS Code [remote containers](https://code.visualstudio.com/docs/remote/containers) extension is included in this repo.
 
-1. Create a folder with your benchmark files
+1. Create a folder with your benchmark files. Requests must be received as POST at `/graphql` on port 8000.
 2. Add an entry to `benchmarks.yaml`
 3. Open a shell using `nix-shell` to get all project dependencies
 4. Run `./run.cr`
