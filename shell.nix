@@ -22,6 +22,7 @@ pkgs.mkShell {
     ruby
     psmisc
     nim
+    bun
     #crystal # broken undefined reference to `GC_get_my_stackbottom'
   ];
 
