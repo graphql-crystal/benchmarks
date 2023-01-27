@@ -193,3 +193,11 @@
       ]
 # broken
 # {"tartiflette", "pipenv", ["run", "--", "python", "app.py"]},
+- id: hono
+  name: Hono
+  url: https://github.com/honojs/graphql-server
+  lang: Bun
+  server: HonoJS
+  run:
+    cmd: bun
+    args: ["index.js"]
