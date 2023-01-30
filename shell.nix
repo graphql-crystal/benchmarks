@@ -23,6 +23,7 @@ pkgs.mkShell {
     psmisc
     nim
     crystal
+    shards
     bun
   ];
 
