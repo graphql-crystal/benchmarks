@@ -1,4 +1,4 @@
-#!/usr/bin/crystal
+#!/usr/bin/env crystal
 require "socket"
 require "http"
 require "json"
