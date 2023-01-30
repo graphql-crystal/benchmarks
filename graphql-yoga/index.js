@@ -1,16 +1,15 @@
-import cluster from 'cluster'
-import {cpus} from 'os'
-import { createServer } from '@graphql-yoga/node'
-
-process.env.PORT = "8000"
+import cluster from "cluster";
+import { cpus } from "os";
+import { createSchema, createYoga } from "graphql-yoga";
+import { createServer } from "node:http";
 
 if (cluster.isPrimary) {
   for (let i = 0; i < cpus().length; i++) {
-    cluster.fork()
+    cluster.fork();
   }
 } else {
-  const server = createServer({
-    schema: {
+  const yoga = createYoga({
+    schema: createSchema({
       typeDefs: `
         type Query {
           hello: String!
@@ -18,12 +17,14 @@ if (cluster.isPrimary) {
       `,
       resolvers: {
         Query: {
-          hello: () => 'world'
-        }
-      }
-    },
+          hello: () => "world",
+        },
+      },
+    }),
     logging: false,
-  })
+  });
 
-  server.start()
+  const server = createServer(yoga);
+
+  server.listen(8000);
 }
