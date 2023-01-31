@@ -22,9 +22,9 @@ pkgs.mkShell {
     ruby
     psmisc
     nim
-    crystal
-    shards
     bun
+    # crystal
+    # shards
   ];
 
   shellHook = ''

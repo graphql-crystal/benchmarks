@@ -15,20 +15,20 @@ benchmarks.map do |b|
     dir = Path[Dir.current, b.id]
     if File.exists? dir.join("shard.yml")
       shards_mut.synchronize do
-        wait_p run("shards", ["install", "-q", "--frozen"], dir)
+        run("shards", ["install", "-q", "--frozen"], dir, true)
       end
     end
-    wait_p run("crystal", ["build", "--release", "-D", "preview_mt", "main.cr"], dir) if File.exists? dir.join("shard.yml")
-    wait_p run("npm", ["ci", "--silent"], dir) if File.exists? dir.join("package.json")
-    wait_p run("cargo", ["build", "--release", "--quiet"], dir) if File.exists? dir.join("Cargo.toml")
-    wait_p run("go", ["build", "-o", "main", "main.go"], dir) if File.exists? dir.join("go.mod")
-    wait_p run("pipenv", ["install"], dir) if File.exists? dir.join("Pipfile")
-    wait_p run("sbt", ["--warn", "compile", "assembly"], dir) if File.exists? dir.join("build.sbt")
-    wait_p run("bundle", ["install", "--quiet"], dir) if File.exists? dir.join("Gemfile")
-    wait_p run("mix", ["deps.get", "--only", "prod"], dir) if File.exists? dir.join("mix.exs")
-    wait_p run("mix", ["compile"], dir) if File.exists? dir.join("mix.exs")
-    wait_p run("nimble", ["--silent", "-y", "install"], dir) if File.exists? dir.join("main.nimble")
-    wait_p run("nimble", ["--silent", "-y", "build", "-d:release", "-d:chronicles_log_level=WARN"], dir) if File.exists? dir.join("main.nimble")
+    run("crystal", ["build", "--release", "-D", "preview_mt", "main.cr"], dir, true) if File.exists? dir.join("shard.yml")
+    run("npm", ["ci", "--silent"], dir, true) if File.exists? dir.join("package.json")
+    run("cargo", ["build", "--release", "--quiet"], dir, true) if File.exists? dir.join("Cargo.toml")
+    run("go", ["build", "-o", "main", "main.go"], dir, true) if File.exists? dir.join("go.mod")
+    run("pipenv", ["install"], dir, true) if File.exists? dir.join("Pipfile")
+    run("sbt", ["--warn", "compile", "assembly"], dir, true) if File.exists? dir.join("build.sbt")
+    run("bundle", ["install", "--quiet"], dir, true) if File.exists? dir.join("Gemfile")
+    run("mix", ["deps.get", "--only", "prod"], dir, true) if File.exists? dir.join("mix.exs")
+    run("mix", ["compile"], dir, true) if File.exists? dir.join("mix.exs")
+    run("nimble", ["--silent", "-y", "install"], dir, true) if File.exists? dir.join("main.nimble")
+    run("nimble", ["--silent", "-y", "build", "-d:release", "-d:chronicles_log_level=WARN"], dir, true) if File.exists? dir.join("main.nimble")
     ch.send(nil)
   rescue ex
     puts ex.message
@@ -59,7 +59,11 @@ benchmarks.each_with_index do |b, i|
   exit 1 unless $?.success?
 
   p.terminate
-  wait_p p
+  r = p.wait
+  if r.exit_code != 0
+    puts "command failed with exit code #{r.exit_code}"
+    exit 1
+  end
 
   benchmarks[i].result = JSON.parse(res.split('\n').last)["result"]
 end
@@ -71,19 +75,18 @@ readme = ECR.render("README.ecr")
 File.write "README.md", readme
 puts readme
 
-def run(cmd, args, dir)
+def run(cmd, args, dir, wait = false)
   env = {"CRYSTAL_WORKERS" => System.cpu_count.to_s, "MIX_ENV" => "prod", "MIX_QUIET" => "1", "PORT" => "8000"}
   p = Process.new(cmd, env: env, args: args, input: Process::Redirect::Inherit, output: Process::Redirect::Inherit, error: Process::Redirect::Inherit, chdir: dir.to_s)
   at_exit { p.terminate unless p.terminated? }
-  p
-end
-
-def wait_p(p)
-  r = p.wait
-  if r.exit_code != 0
-    puts "command failed with exit code #{r.exit_code}"
-    exit 1
+  if wait
+    r = p.wait
+    if r.exit_code != 0
+      puts "#{dir}: command '#{cmd}' failed with exit code #{r.exit_code}"
+      exit 1
+    end
   end
+  p
 end
 
 def wait_unbound(time : Int32)

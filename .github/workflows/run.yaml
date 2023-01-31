@@ -41,6 +41,9 @@ jobs:
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      - name: Install crystal
+        run: |
+          curl -fsSL https://crystal-lang.org/install.sh | sudo bash
       - name: Run benchmarks
         run: nix-shell --quiet --run ./run.cr
       - name: Push readme
