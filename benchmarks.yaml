@@ -112,8 +112,16 @@
         "-b",
         "tcp://127.0.0.1:8000",
       ]
-- id: graphql-yoga
-  name: graphql-yoga
+- id: graphql-yoga-bun
+  name: GraphQL Yoga on Bun
+  url: https://github.com/dotansimha/graphql-yoga
+  lang: Bun
+  server: http
+  run:
+    cmd: bun
+    args: ["index.js"]
+- id: graphql-yoga-node
+  name: GraphQL Yoga on Node
   url: https://github.com/dotansimha/graphql-yoga
   lang: Node.js
   server: http
