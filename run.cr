@@ -18,17 +18,6 @@ benchmarks.map do |b|
         run("shards", ["install", "-q", "--frozen"], dir, true)
       end
     end
-    run("crystal", ["build", "--release", "-D", "preview_mt", "main.cr"], dir, true) if File.exists? dir.join("shard.yml")
-    run("npm", ["ci", "--silent"], dir, true) if File.exists? dir.join("package.json")
-    run("cargo", ["build", "--release", "--quiet"], dir, true) if File.exists? dir.join("Cargo.toml")
-    run("go", ["build", "-o", "main", "main.go"], dir, true) if File.exists? dir.join("go.mod")
-    run("pipenv", ["install"], dir, true) if File.exists? dir.join("Pipfile")
-    run("sbt", ["--warn", "compile", "assembly"], dir, true) if File.exists? dir.join("build.sbt")
-    run("bundle", ["install", "--quiet"], dir, true) if File.exists? dir.join("Gemfile")
-    run("mix", ["deps.get", "--only", "prod"], dir, true) if File.exists? dir.join("mix.exs")
-    run("mix", ["compile"], dir, true) if File.exists? dir.join("mix.exs")
-    run("nimble", ["--silent", "-y", "install"], dir, true) if File.exists? dir.join("main.nimble")
-    run("nimble", ["--silent", "-y", "build", "-d:release", "-d:chronicles_log_level=WARN"], dir, true) if File.exists? dir.join("main.nimble")
     ch.send(nil)
   rescue ex
     puts ex.message
@@ -55,7 +44,7 @@ benchmarks.each_with_index do |b, i|
     sleep 1
   end
 
-  res = `bombardier -c #{System.cpu_count * 50} -d 5s -m POST -b '{"query":"{ hello }"}' -H "Content-Type: application/json" -o json -p r http://localhost:8000/graphql`
+  res = `bombardier -c #{System.cpu_count * 50} -d 5s -m POST -b 'fragment User on User {  id  username  name}fragment Review on Review {  id  body}fragment Product on Product {  inStock  name  price  shippingEstimate  upc  weight}query TestQuery {  users {    ...User    reviews {      ...Review      product {        ...Product      }    }  }  topProducts {    ...Product    reviews {      ...Review      author {        ...User      }    }  }}' -H "Content-Type: application/json" -o json -p r http://localhost:8000/graphql`
   exit 1 unless $?.success?
 
   p.terminate

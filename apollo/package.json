@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-      "apollo-server": "~3.11.0"
-  },
-  "type": "module"
-}

@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "@apollo/server": "4.4.0",
+    "@apollo/gateway": "2.3.2",
+    "@apollo/subgraph": "2.3.2",
+    "@envelop/apollo-federation": "3.0.4",
+    "graphql": "16.6.0",
+    "graphql-tag": "2.12.6",
+    "graphql-yoga": "3.6.1",
+    "wait-on": "7.0.1"
+  },
+  "type": "module"
+}
