@@ -12,6 +12,6 @@ libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor" % "2.7.0",
   "com.typesafe.akka" %% "akka-stream" % "2.7.0",
   "com.typesafe.akka" %% "akka-http" % "10.5.0",
-  "com.typesafe.akka" %% "akka-http-core" % "10.4.0",
+  "com.typesafe.akka" %% "akka-http-core" % "10.5.0",
   "ch.qos.logback" % "logback-classic" % "1.2.11" % Runtime,
 )
