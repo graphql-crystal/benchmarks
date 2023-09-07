@@ -23,8 +23,9 @@ pkgs.mkShell {
     psmisc
     nim
     bun
-    # crystal
-    # shards
+    pcre2
+    crystal
+    shards
   ];
 
   shellHook = ''
