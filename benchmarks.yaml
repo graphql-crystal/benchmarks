@@ -201,3 +201,12 @@
   run:
     cmd: bun
     args: ["index.js"]
+- id: tailcall
+  name: tailcall
+  url: https://github.com/tailcallhq/tailcall
+  lang: Rust
+  server: Tailcall
+  run: |
+    wget https://github.com/tailcallhq/tailcall/releases/download/v0.13.0/tailcall-x86_64-unknown-linux-gnu
+    chmod +x ./tailcall-x86_64-unknown-linux-gnu
+    ./tailcall-x86_64-unknown-linux-gnu start ./hello.graphql

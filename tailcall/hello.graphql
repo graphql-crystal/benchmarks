@@ -1,0 +1,13 @@
+schema
+  @server(
+    port: 8000
+    enableHttpCache: true
+    enableGraphiql: "/graphql"
+    enableQueryValidation: false
+  ) {
+  query: Query
+}
+
+type Query {
+  hello: String! @const(data: "world")
+}
