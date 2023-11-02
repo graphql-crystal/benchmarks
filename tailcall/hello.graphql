@@ -1,10 +1,4 @@
-schema
-  @server(
-    port: 8000
-    enableHttpCache: true
-    enableGraphiql: "/graphql"
-    enableQueryValidation: false
-  ) {
+schema @server(port: 8000, enableHttpCache: true, enableGraphiql: true) {
   query: Query
 }
 
