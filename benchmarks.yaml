@@ -143,20 +143,20 @@
   server: Actix Web
   run:
     cmd: ./target/release/juniper
-- id: sangria
-  name: Sangria
-  url: https://github.com/sangria-graphql/sangria
-  lang: Scala
-  server: Akka HTTP
-  run:
-    cmd: java
-    args:
-      [
-        "-Xrs",
-        "-Xmx4G",
-        "-jar",
-        "./target/scala-2.13/sangria-assembly-0.1.0-SNAPSHOT.jar",
-      ]
+# - id: sangria
+#   name: Sangria
+#   url: https://github.com/sangria-graphql/sangria
+#   lang: Scala
+#   server: Akka HTTP
+#   run:
+#     cmd: java
+#     args:
+#       [
+#         "-Xrs",
+#         "-Xmx4G",
+#         "-jar",
+#         "./target/scala-2.13/sangria-assembly-0.1.0-SNAPSHOT.jar",
+#       ]
 # - id: static-crystal
 #   name: static-crystal
 #   url: "https://actix.rs/"
