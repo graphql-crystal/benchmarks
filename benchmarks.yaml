@@ -149,12 +149,7 @@
   lang: Rust
   server: Tailcall Server
   run:
-    cmd: tc
-    args: 
-      [
-        "start",
-        "main.graphql"
-      ]
+    cmd: "./tailcall.sh"
 - id: sangria
   name: Sangria
   url: https://github.com/sangria-graphql/sangria
