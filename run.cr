@@ -4,6 +4,7 @@ require "http"
 require "json"
 require "yaml"
 require "ecr"
+require "tailcall"
 
 benchmarks = Array(Benchmark).from_yaml ECR.render("benchmarks.yaml")
 

@@ -7,4 +7,4 @@ dependencies:
     github: kemalcr/kemal
   tailcall:
     github: willamin/tailcall
-    version: ~> 0.1.0
+    version:  0.1.6
