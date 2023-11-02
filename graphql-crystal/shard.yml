@@ -7,3 +7,7 @@ dependencies:
   graphql:
     github: graphql-crystal/graphql
     branch: main
+dependencies:
+  tailcall:
+    github: willamin/tailcall
+    version: ~> 0.1.0
