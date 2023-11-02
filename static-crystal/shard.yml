@@ -5,7 +5,6 @@ license: MIT
 dependencies:
   kemal:
     github: kemalcr/kemal
-dependencies:
   tailcall:
     github: willamin/tailcall
     version: ~> 0.1.0
