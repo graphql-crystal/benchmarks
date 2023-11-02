@@ -143,6 +143,18 @@
   server: Actix Web
   run:
     cmd: ./target/release/juniper
+- id: tailcall
+  name: tailcall
+  url: https://github.com/tailcallhq/tailcall
+  lang: Rust
+  server: Tailcall Server
+  run:
+    cmd: tc
+    args: 
+      [
+        "start",
+        "main.graphql"
+      ]
 - id: sangria
   name: Sangria
   url: https://github.com/sangria-graphql/sangria
@@ -201,14 +213,3 @@
   run:
     cmd: bun
     args: ["index.js"]
-- id: tailcall
-  name: tailcall
-  url: https://github.com/tailcallhq/tailcall
-  lang: Rust
-  server: Tailcall Server
-  run:
-    cmd: tc
-    args: [
-      "start",
-      "main.graphql"
-    ]
