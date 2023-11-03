@@ -1,4 +1,4 @@
-schema @server(port: 8000, enableHttpCache: true, enableGraphiql: true) {
+schema @server(port: 8000) {
   query: Query
 }
 

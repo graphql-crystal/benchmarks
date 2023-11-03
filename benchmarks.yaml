@@ -147,7 +147,7 @@
   name: tailcall
   url: https://github.com/tailcallhq/tailcall
   lang: Rust
-  server: Tailcall Server
+  server: Tailcall
   run:
     cmd: sh
     args: ["tailcall.sh"]
