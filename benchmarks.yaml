@@ -95,23 +95,6 @@
 #   server: Chronos
 #   run:
 #     cmd: ./main
-- id: graphql-ruby
-  name: graphql-ruby
-  url: https://github.com/rmosolgo/graphql-ruby
-  lang: Ruby
-  server: Puma
-  run:
-    cmd: puma
-    args:
-      [
-        "-w",
-        <%= System.cpu_count.to_s %>,
-        "-s",
-        "-t",
-        "2",
-        "-b",
-        "tcp://127.0.0.1:8000",
-      ]
 - id: graphql-yoga
   name: graphql-yoga
   url: https://github.com/dotansimha/graphql-yoga
@@ -201,6 +184,23 @@
   run:
     cmd: bun
     args: ["index.js"]
+- id: graphql-ruby
+  name: graphql-ruby
+  url: https://github.com/rmosolgo/graphql-ruby
+  lang: Ruby
+  server: Puma
+  run:
+    cmd: puma
+    args:
+      [
+        "-w",
+        <%= System.cpu_count.to_s %>,
+        "-s",
+        "-t",
+        "2",
+        "-b",
+        "tcp://127.0.0.1:8000",
+      ]
 - id: tailcall
   name: tailcall
   url: https://github.com/tailcallhq/tailcall
