@@ -55,8 +55,12 @@ benchmarks.each_with_index do |b, i|
     sleep 1
   end
 
-  res = (0...1).map { |_| `bombardier --http2 -c #{System.cpu_count * 50} -d 5s -m POST -b '{"query":"{ hello }"}' -H "Content-Type: application/json" -o json -p r http://localhost:8000/graphql` }.last
-  exit 1 unless $?.success?
+  res = (0...1).map do |_|
+    output = IO::Memory.new
+    run("bombardier", ["--http2", "-c#{System.cpu_count * 50}", "-d5s", "-mPOST", %(-b'{"query":"{ hello }"}'), %(-H'
+    Content-Type: application/json'), "-ojson", "-pr", "http://localhost:8000/graphql"], wait: true, output: output)
+    output.to_s
+  end.last
 
   p.terminate
   r = p.wait
@@ -75,9 +79,9 @@ readme = ECR.render("README.ecr")
 File.write "README.md", readme
 puts readme
 
-def run(cmd, args, dir, wait = false)
+def run(cmd, args, dir = Dir.current, wait = false, output = Process::Redirect::Inherit, error = Process::Redirect::Inherit)
   env = {"CRYSTAL_WORKERS" => System.cpu_count.to_s, "MIX_ENV" => "prod", "MIX_QUIET" => "1", "PORT" => "8000"}
-  p = Process.new(cmd, env: env, args: args, input: Process::Redirect::Inherit, output: Process::Redirect::Inherit, error: Process::Redirect::Inherit, chdir: dir.to_s)
+  p = Process.new(cmd, env: env, args: args, output: output, error: error, chdir: dir.to_s)
   at_exit { p.terminate unless p.terminated? }
   if wait
     r = p.wait
