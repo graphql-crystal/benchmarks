@@ -6,4 +6,4 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
 gem "graphql", "2.0.5"
 gem "roda", "3.54.0"
-gem "puma", "5.6.4"
+gem "puma", "5.6.7"
