@@ -20,6 +20,7 @@ pkgs.mkShell {
     cmake
     elixir
     ruby
+    bundler
     psmisc
     nim
     bun
@@ -29,8 +30,13 @@ pkgs.mkShell {
   ];
 
   shellHook = ''
+    # workaround https://github.com/sbt/sbt-assembly/issues/496
+    export LC_ALL=C.UTF-8
+    
     export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+    export GEM_PATH="$GEM_HOME:$GEM_PATH"
     export PATH="$PATH:$GEM_HOME/bin:$HOME/go/bin"
+
     go install github.com/codesenberg/bombardier@latest
     mix local.hex --force
     mix local.rebar --force
