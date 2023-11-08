@@ -36,10 +36,12 @@ pkgs.mkShell {
     
     export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
     export GEM_PATH="$GEM_HOME:$GEM_PATH"
-    export PATH="$PATH:$GEM_HOME/bin:$HOME/go/bin"
+    export PATH="$PATH:$GEM_HOME/bin:$HOME/go/bin:$HOME/.cargo/bin"
 
     go install github.com/codesenberg/bombardier@latest
     mix local.hex --force
     mix local.rebar --force
+
+    cargo install --git https://github.com/tailcallhq/tailcall
   '';
 }
