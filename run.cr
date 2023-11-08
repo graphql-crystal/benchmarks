@@ -57,8 +57,7 @@ benchmarks.each_with_index do |b, i|
 
   res = (0...1).map do |_|
     output = IO::Memory.new
-    run("bombardier", ["--http2", "-c#{System.cpu_count * 50}", "-d5s", "-mPOST", %(-b'{"query":"{ hello }"}'), %(-H'
-    Content-Type: application/json'), "-ojson", "-pr", "http://localhost:8000/graphql"], wait: true, output: output)
+    run("bombardier", ["-c#{System.cpu_count * 50}", "-d5s", "-mPOST", %(-b{"query":"{ hello }"}), "-HContent-Type: application/json", "-ojson", "-pr", "http://localhost:8000/graphql"], wait: true, output: output)
     output.to_s
   end.last
 
