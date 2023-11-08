@@ -23,6 +23,7 @@ pkgs.mkShell {
     bundler
     psmisc
     nim
+    nimPackages.nimble
     bun
     pcre2
     crystal
