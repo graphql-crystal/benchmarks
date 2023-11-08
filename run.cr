@@ -55,7 +55,7 @@ benchmarks.each_with_index do |b, i|
     sleep 1
   end
 
-  res = (0...1).map { |_| `bombardier -c #{System.cpu_count * 50} -d 5s -m POST -b '{"query":"{ hello }"}' -H "Content-Type: application/json" -o json -p r http://localhost:8000/graphql` }.last
+  res = (0...1).map { |_| `bombardier --http2 -c #{System.cpu_count * 50} -d 5s -m POST -b '{"query":"{ hello }"}' -H "Content-Type: application/json" -o json -p r http://localhost:8000/graphql` }.last
   exit 1 unless $?.success?
 
   p.terminate
