@@ -10,18 +10,19 @@
       "VARIANT": "bullseye"
     }
   },
-  // Set *default* container specific settings.json values on container create.
-  "settings": {},
-  // Add the IDs of extensions you want installed when the container is created.
-  "extensions": [
-    "crystal-lang-tools.crystal-lang",
-    "kosz78.nim",
-    "scala-lang.scala",
-    "scalameta.metals",
-    "esbenp.prettier-vscode",
-    "mjmcloug.vscode-elixir",
-    "jnoortheen.nix-ide"
-  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "crystal-lang-tools.crystal-lang",
+        "kosz78.nim",
+        "scala-lang.scala",
+        "scalameta.metals",
+        "esbenp.prettier-vscode",
+        "mjmcloug.vscode-elixir",
+        "jnoortheen.nix-ide"
+      ]
+    }
+  },
   "workspaceMount": "",
   "runArgs": [
     "--volume=${localWorkspaceFolder}:/workspaces/${localWorkspaceFolderBasename}:Z"
