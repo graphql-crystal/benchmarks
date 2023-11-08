@@ -103,11 +103,11 @@ def wait_unbound(time : Int32)
 end
 
 def port_bound?
-  s = TCPServer.new("127.0.0.1", 8000)
-  s.close
+  TCPSocket.open("127.0.0.1", 8000) do |s|
+    true
+  end
+rescue Socket::ConnectError
   false
-rescue Socket::BindError
-  true
 end
 
 class Benchmark
