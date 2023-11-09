@@ -1,205 +1,205 @@
 # should be alphabetical but agoo must come first or it will say adress in use
-#- id: agoo
-#  name: agoo
-#  url: https://github.com/ohler55/agoo
-#  lang: Ruby/C
-#  server: agoo
-#  run:
-#    cmd: ruby
-#    args: ["main.rb"]
-#- id: absinthe
-#  name: Absinthe
-#  url: https://github.com/absinthe-graphql/absinthe
-#  lang: Elixir
-#  server: Phoenix
-#  run:
-#    cmd: mix
-#    args: ["phx.server"]
-#- id: async-graphql
-#  name: async-graphql
-#  url: https://github.com/async-graphql/async-graphql
-#  lang: Rust
-#  server: Actix Web
-#  run:
-#    cmd: ./target/release/async-graphql
-#- id: gqlgen
-#  name: gqlgen
-#  url: https://github.com/99designs/gqlgen
-#  lang: Go
-#  server: net/http
-#  run:
-#    cmd: ./main
-#- id: graphene
-#  name: Graphene
-#  url: https://github.com/graphql-python/graphene
-#  lang: Python
-#  server: gunicorn
-#  run:
-#    cmd: pipenv
-#    args:
-#      [
-#        "run",
-#        "--",
-#        "gunicorn",
-#        "--log-level",
-#        "warning",
-#        "-w",
-#        <%= System.cpu_count.to_s %>,
-#        "-b",
-#        "127.0.0.1:8000",
-#        "app:app",
-#      ]
-#- id: graphql-crystal
-#  name: graphql-crystal
-#  url: https://github.com/graphql-crystal/graphql
-#  lang: Crystal
-#  server: Kemal
-#  run:
-#    cmd: ./main
-#- id: graphql-go
-#  name: graphql-go
-#  url: https://github.com/graphql-go/graphql
-#  lang: Go
-#  server: net/http
-#  run:
-#    cmd: ./main
-#- id: graphql-jit
-#  name: graphql-jit
-#  url: https://github.com/zalando-incubator/graphql-jit
-#  lang: Node.js
-#  server: http
-#  run:
-#    cmd: node
-#    args: ["index.js"]
-#- id: graphql-js
-#  name: graphql-js
-#  url: https://github.com/graphql/graphql-js
-#  lang: Node.js
-#  server: http
-#  run:
-#    cmd: node
-#    args: ["index.js"]
-#- id: mercurius
-#  name: Mercurius
-#  url: https://github.com/mercurius-js/mercurius
-#  lang: Node.js
-#  server: Fastify
-#  run:
-#    cmd: node
-#    args: ["index.js"]
-#- id: nim-graphql
-#  name: nim-graphql
-#  url: https://github.com/status-im/nim-graphql
-#  lang: Nim
-#  server: Chronos
-#  run:
-#    cmd: ./main
-#- id: graphql-ruby
-#  name: graphql-ruby
-#  url: https://github.com/rmosolgo/graphql-ruby
-#  lang: Ruby
-#  server: Puma
-#  run:
-#    cmd: puma
-#    args:
-#      [
-#        "-w",
-#        <%= System.cpu_count.to_s %>,
-#        "-s",
-#        "-t",
-#        "2",
-#        "-b",
-#        "tcp://127.0.0.1:8000",
-#      ]
-#- id: graphql-yoga
-#  name: graphql-yoga
-#  url: https://github.com/dotansimha/graphql-yoga
-#  lang: Node.js
-#  server: http
-#  run:
-#    cmd: node
-#    args: ["--no-warnings", "index.js"]
-#- id: apollo
-#  name: apollo
-#  url: https://github.com/apollographql/apollo-server
-#  lang: Node.js
-#  server: Express
-#  run:
-#    cmd: node
-#    args: ["--no-warnings", "index.js"]
-#- id: hotchocolate
-#  name: Hot Chocolate
-#  url: https://github.com/ChilliCream/hotchocolate
-#  lang: C#
-#  server: "ASP.NET"
-#  run:
-#    cmd: dotnet
-#    args: ["run", "-c", "Release", "-v", "quiet", "--nologo"]
-#- id: juniper
-#  name: Juniper
-#  url: https://github.com/graphql-rust/juniper
-#  lang: Rust
-#  server: Actix Web
-#  run:
-#    cmd: ./target/release/juniper
-#- id: sangria
-#  name: Sangria
-#  url: https://github.com/sangria-graphql/sangria
-#  lang: Scala
-#  server: Akka HTTP
-#  run:
-#    cmd: java
-#    args:
-#      [
-#        "-Xrs",
-#        "-Xmx4G",
-#        "-jar",
-#        "./target/scala-2.13/sangria-assembly-0.1.0-SNAPSHOT.jar",
-#      ]
-## - id: static-crystal
-##   name: static-crystal
-##   url: "https://actix.rs/"
-##   lang: Crystal
-##   server: Kemal
-##   run:
-##     cmd: ./main
-#- id: static-rust
-#  name: static-rust
-#  url: "https://actix.rs/"
-#  lang: Rust
-#  server: Actix Web
-#  run:
-#    cmd: ./target/release/static-rust
-#- id: strawberry
-#  name: Strawberry
-#  url: https://github.com/strawberry-graphql/strawberry
-#  lang: Python
-#  server: gunicorn
-#  run:
-#    cmd: pipenv
-#    args:
-#      [
-#        "run",
-#        "--",
-#        "gunicorn",
-#        "--log-level",
-#        "warning",
-#        "-w",
-#        <%= System.cpu_count.to_s %>,
-#        "-b",
-#        "127.0.0.1:8000",
-#        "app:app",
-#      ]
-## broken
-## {"tartiflette", "pipenv", ["run", "--", "python", "app.py"]},
-#- id: hono
-#  name: Hono
-#  url: https://github.com/honojs/graphql-server
-#  lang: Bun
-#  server: HonoJS
-#  run:
-#    cmd: bun
-#    args: ["index.js"]
+- id: agoo
+  name: agoo
+  url: https://github.com/ohler55/agoo
+  lang: Ruby/C
+  server: agoo
+  run:
+    cmd: ruby
+    args: ["main.rb"]
+- id: absinthe
+  name: Absinthe
+  url: https://github.com/absinthe-graphql/absinthe
+  lang: Elixir
+  server: Phoenix
+  run:
+    cmd: mix
+    args: ["phx.server"]
+- id: async-graphql
+  name: async-graphql
+  url: https://github.com/async-graphql/async-graphql
+  lang: Rust
+  server: Actix Web
+  run:
+    cmd: ./target/release/async-graphql
+- id: gqlgen
+  name: gqlgen
+  url: https://github.com/99designs/gqlgen
+  lang: Go
+  server: net/http
+  run:
+    cmd: ./main
+- id: graphene
+  name: Graphene
+  url: https://github.com/graphql-python/graphene
+  lang: Python
+  server: gunicorn
+  run:
+    cmd: pipenv
+    args:
+      [
+        "run",
+        "--",
+        "gunicorn",
+        "--log-level",
+        "warning",
+        "-w",
+        <%= System.cpu_count.to_s %>,
+        "-b",
+        "127.0.0.1:8000",
+        "app:app",
+      ]
+- id: graphql-crystal
+  name: graphql-crystal
+  url: https://github.com/graphql-crystal/graphql
+  lang: Crystal
+  server: Kemal
+  run:
+    cmd: ./main
+- id: graphql-go
+  name: graphql-go
+  url: https://github.com/graphql-go/graphql
+  lang: Go
+  server: net/http
+  run:
+    cmd: ./main
+- id: graphql-jit
+  name: graphql-jit
+  url: https://github.com/zalando-incubator/graphql-jit
+  lang: Node.js
+  server: http
+  run:
+    cmd: node
+    args: ["index.js"]
+- id: graphql-js
+  name: graphql-js
+  url: https://github.com/graphql/graphql-js
+  lang: Node.js
+  server: http
+  run:
+    cmd: node
+    args: ["index.js"]
+- id: mercurius
+  name: Mercurius
+  url: https://github.com/mercurius-js/mercurius
+  lang: Node.js
+  server: Fastify
+  run:
+    cmd: node
+    args: ["index.js"]
+- id: nim-graphql
+  name: nim-graphql
+  url: https://github.com/status-im/nim-graphql
+  lang: Nim
+  server: Chronos
+  run:
+    cmd: ./main
+- id: graphql-ruby
+  name: graphql-ruby
+  url: https://github.com/rmosolgo/graphql-ruby
+  lang: Ruby
+  server: Puma
+  run:
+    cmd: puma
+    args:
+      [
+        "-w",
+        <%= System.cpu_count.to_s %>,
+        "-s",
+        "-t",
+        "2",
+        "-b",
+        "tcp://127.0.0.1:8000",
+      ]
+- id: graphql-yoga
+  name: graphql-yoga
+  url: https://github.com/dotansimha/graphql-yoga
+  lang: Node.js
+  server: http
+  run:
+    cmd: node
+    args: ["--no-warnings", "index.js"]
+- id: apollo
+  name: apollo
+  url: https://github.com/apollographql/apollo-server
+  lang: Node.js
+  server: Express
+  run:
+    cmd: node
+    args: ["--no-warnings", "index.js"]
+- id: hotchocolate
+  name: Hot Chocolate
+  url: https://github.com/ChilliCream/hotchocolate
+  lang: C#
+  server: "ASP.NET"
+  run:
+    cmd: dotnet
+    args: ["run", "-c", "Release", "-v", "quiet", "--nologo"]
+- id: juniper
+  name: Juniper
+  url: https://github.com/graphql-rust/juniper
+  lang: Rust
+  server: Actix Web
+  run:
+    cmd: ./target/release/juniper
+- id: sangria
+  name: Sangria
+  url: https://github.com/sangria-graphql/sangria
+  lang: Scala
+  server: Akka HTTP
+  run:
+    cmd: java
+    args:
+      [
+        "-Xrs",
+        "-Xmx4G",
+        "-jar",
+        "./target/scala-2.13/sangria-assembly-0.1.0-SNAPSHOT.jar",
+      ]
+# - id: static-crystal
+#   name: static-crystal
+#   url: "https://actix.rs/"
+#   lang: Crystal
+#   server: Kemal
+#   run:
+#     cmd: ./main
+- id: static-rust
+  name: static-rust
+  url: "https://actix.rs/"
+  lang: Rust
+  server: Actix Web
+  run:
+    cmd: ./target/release/static-rust
+- id: strawberry
+  name: Strawberry
+  url: https://github.com/strawberry-graphql/strawberry
+  lang: Python
+  server: gunicorn
+  run:
+    cmd: pipenv
+    args:
+      [
+        "run",
+        "--",
+        "gunicorn",
+        "--log-level",
+        "warning",
+        "-w",
+        <%= System.cpu_count.to_s %>,
+        "-b",
+        "127.0.0.1:8000",
+        "app:app",
+      ]
+# broken
+# {"tartiflette", "pipenv", ["run", "--", "python", "app.py"]},
+- id: hono
+  name: Hono
+  url: https://github.com/honojs/graphql-server
+  lang: Bun
+  server: HonoJS
+  run:
+    cmd: bun
+    args: ["index.js"]
 - id: tailcall
   name: Tailcall
   url: https://tailcall.run/
