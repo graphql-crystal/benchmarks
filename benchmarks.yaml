@@ -206,7 +206,7 @@
   lang: Rust
   server: Hyper
   run:
-    cmd: tailcall
+    cmd: tc
     args:
       - start
-      - ./main.graphql
+      - ./main.graphql --log-level error

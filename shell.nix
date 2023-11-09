@@ -42,6 +42,7 @@ pkgs.mkShell {
     mix local.hex --force
     mix local.rebar --force
 
-    cargo install --git https://github.com/tailcallhq/tailcall
+    curl -sSL https://raw.githubusercontent.com/tailcallhq/tailcall/master/install.sh | bash -s -- v0.14.14
+    export PATH="$HOME/.tailcall/bin:$PATH"
   '';
 }
