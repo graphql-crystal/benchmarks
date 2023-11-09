@@ -209,4 +209,5 @@
     cmd: tc
     args:
       - start
-      - ./main.graphql --log-level error
+      - ./main.graphql
+      - --log-level error
