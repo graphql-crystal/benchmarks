@@ -11,6 +11,11 @@ end
 
 schema = GraphQL::Schema.new(Query.new)
 
+# Use a before_all block to set the Date header
+before_all do |env|
+  env.response.headers["Date"] = Time.utc.to_rfc2822
+end
+
 post "/graphql" do |env|
   env.response.content_type = "application/json"
 
