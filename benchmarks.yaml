@@ -206,9 +206,5 @@
   lang: Rust
   server: Hyper
   run:
-    cmd: tc
-    args:
-      - start
-      - ./main.graphql
-      - --log-level
-      - error
+    cmd: npm
+    args: ["run", "main"]
