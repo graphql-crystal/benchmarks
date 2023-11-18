@@ -10,7 +10,7 @@ on:
 
 jobs:
   run:
-    runs-on: ubuntu-latest
+    runs-on: benchmarking-runner
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
