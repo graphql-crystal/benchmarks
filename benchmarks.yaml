@@ -210,3 +210,16 @@
     args:
       - start
       - ./main.graphql
+- id: caliban
+  name: Caliban
+  url: https://ghostdogpr.github.io/caliban/
+  lang: Scala
+  server: ZIO Http
+  run:
+    cmd: java
+    args:
+      [
+        "-Xmx4G",
+        "-jar",
+        "./target/scala-3.3.1/caliban-assembly-0.1.0-SNAPSHOT.jar",
+      ]
