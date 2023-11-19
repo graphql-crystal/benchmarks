@@ -79,7 +79,7 @@ File.write "README.md", readme
 puts readme
 
 def run(cmd, args, dir = Dir.current, wait = false, output = Process::Redirect::Inherit, error = Process::Redirect::Inherit)
-  env = {"CRYSTAL_WORKERS" => System.cpu_count.to_s, "MIX_ENV" => "prod", "MIX_QUIET" => "1", "PORT" => "8000"}
+  env = {"CRYSTAL_WORKERS" => System.cpu_count.to_s, "MIX_ENV" => "prod", "MIX_QUIET" => "1", "PORT" => "8000", "RUSTFLAGS" => "-C target-cpu=native"}
   p = Process.new(cmd, env: env, args: args, output: output, error: error, chdir: dir.to_s)
   at_exit { p.terminate unless p.terminated? }
   if wait

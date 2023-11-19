@@ -1,5 +1,7 @@
+use mimalloc::MiMalloc;
 use actix_web::{Result, web, App, HttpServer};
-
+#[global_allocator]
+static GLOBAL: MiMalloc = MiMalloc;
 async fn graphql() -> Result<String> {
     Ok("{\"data\":{\"hello\":\"world\"}}".to_string())
 }
