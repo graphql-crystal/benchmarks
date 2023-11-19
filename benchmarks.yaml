@@ -210,3 +210,5 @@
     args:
       - start
       - ./main.graphql
+      - --log-level
+      - error

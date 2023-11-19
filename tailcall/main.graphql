@@ -1,4 +1,4 @@
-schema @server(port: 8000) {
+schema @server(port: 8000, enableQueryValidation: false) {
   query: Query
 }
 
