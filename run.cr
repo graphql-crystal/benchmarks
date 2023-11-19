@@ -64,8 +64,10 @@ benchmarks.each_with_index do |b, i|
   p.terminate
   r = p.wait
   if r.exit_code != 0
-    puts "command failed with exit code #{r.exit_code}"
-    exit 1
+    if r.exit_code != 143
+      puts "command failed with exit code #{r.exit_code}"
+      exit 1
+    end
   end
 
   benchmarks[i].result = JSON.parse(res.split('\n').last)["result"]
@@ -85,10 +87,8 @@ def run(cmd, args, dir = Dir.current, wait = false, output = Process::Redirect::
   if wait
     r = p.wait
     if r.exit_code != 0
-      if r.exit_cde != 143
-        puts "#{dir}: command '#{cmd}' failed with exit code #{r.exit_code}"
-        exit 1
-      end
+      puts "#{dir}: command '#{cmd}' failed with exit code #{r.exit_code}"
+      exit 1
     end
   end
   p
