@@ -42,6 +42,6 @@ pkgs.mkShell {
     mix local.hex --force
     mix local.rebar --force
 
-    cargo install --git https://github.com/tailcallhq/tailcall
+    RUSTFLAGS="-C target-cpu=native" cargo install --git https://github.com/tailcallhq/tailcall
   '';
 }
