@@ -41,7 +41,5 @@ pkgs.mkShell {
     go install github.com/codesenberg/bombardier@latest
     mix local.hex --force
     mix local.rebar --force
-
-    cargo install --git https://github.com/tailcallhq/tailcall
   '';
 }

@@ -206,7 +206,5 @@
   lang: Rust
   server: Hyper
   run:
-    cmd: tailcall
-    args:
-      - start
-      - ./main.graphql
+    cmd: ./run.sh
+    
