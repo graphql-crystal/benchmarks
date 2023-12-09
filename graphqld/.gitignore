@@ -1,0 +1,16 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/graphqld
+graphqld.so
+graphqld.dylib
+graphqld.dll
+graphqld.a
+graphqld.lib
+graphqld-test-*
+*.exe
+*.pdb
+*.o
+*.obj
+*.lst

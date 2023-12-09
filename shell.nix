@@ -28,6 +28,8 @@ pkgs.mkShell {
     pcre2
     crystal
     shards
+    ldc
+    dub
   ];
 
   shellHook = ''

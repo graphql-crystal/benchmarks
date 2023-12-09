@@ -29,6 +29,7 @@ benchmarks.map do |b|
     run("mix", ["compile"], dir, true) if File.exists? dir.join("mix.exs")
     run("nimble", ["--silent", "-y", "install"], dir, true) if File.exists? dir.join("main.nimble")
     run("nimble", ["--silent", "-y", "build", "-d:release", "-d:chronicles_log_level=WARN"], dir, true) if File.exists? dir.join("main.nimble")
+    run("dub", ["build", "-b=release", dir, true) if File.exists? dir.join("dub.json")
     ch.send(nil)
   rescue ex
     puts ex.message
