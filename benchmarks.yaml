@@ -29,6 +29,17 @@
   server: net/http
   run:
     cmd: ./main
+- id: gqlr
+  name: gqlr
+  url: https://github.com/schloerke/gqlr
+  lang: R
+  server: Plumber
+  run:
+    cmd: Rscript
+    args:
+      [
+        "./graphql_bench.R"
+      ]
 - id: graphene
   name: Graphene
   url: https://github.com/graphql-python/graphene

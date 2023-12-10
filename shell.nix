@@ -28,6 +28,15 @@ pkgs.mkShell {
     pcre2
     crystal
     shards
+    R
+    rPackages.renv
+    rPackages.magrittr
+    rPackages.jsonlite
+    rPackages.Rcpp
+    rPackages.plumber
+    rPackages.pryr
+    rPackages.graphql
+    rPackages.gqlr
   ];
 
   shellHook = ''
