@@ -28,6 +28,8 @@ GraphQLD!(Schema, CustomContext) graphqld;
 
 void main()
 {
+    import vibe.core.log : LogLevel, setLogLevel;
+
     GQLDOptions opts;
     opts.asyncList = AsyncList.no;
     graphqld = new GraphQLD!(Schema,CustomContext)(opts);
