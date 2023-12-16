@@ -39,7 +39,10 @@ void main()
     auto settings = new HTTPServerSettings;
 	settings.port = 8000;
 	settings.bindAddresses = ["::1", "127.0.0.1"];
-	listenHTTP(settings, &handler);
+	auto listener = listenHTTP(settings, &handler);
+
+    scope(exit)
+        listener.stopListening();
 
     runApplication();
 }
