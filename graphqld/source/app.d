@@ -1,11 +1,5 @@
 import std;
 
-version(LDC) {
-	import std.experimental.logger;
-} else {
-	import std.logger;
-}
-
 import graphql;
 import graphql.schema.directives;
 
@@ -28,21 +22,9 @@ GraphQLD!(Schema, CustomContext) graphqld;
 
 void main()
 {
-    import vibe.core.log : LogLevel, setLogLevel;
-
     GQLDOptions opts;
     opts.asyncList = AsyncList.no;
     graphqld = new GraphQLD!(Schema,CustomContext)(opts);
-
-    version(LDC) {
-		graphqld.defaultResolverLog.logLevel = std.experimental.logger.LogLevel.off;
-		graphqld.resolverLog.logLevel = std.experimental.logger.LogLevel.off;
-		graphqld.executationTraceLog = new std.experimental.logger.FileLogger("exec.log");
-		graphqld.executationTraceLog.logLevel = std.experimental.logger.LogLevel.trace;
-	} else {
-		graphqld.defaultResolverLog.logLevel = std.logger.LogLevel.off;
-		graphqld.resolverLog.logLevel = std.logger.LogLevel.off;
-	}
 
     graphqld.setResolver("queryType", "hello",
 			delegate(string name, Json parent, Json args,
@@ -54,7 +36,6 @@ void main()
 			}
 		);
 
-    setLogLevel(LogLevel.error);
     auto settings = new HTTPServerSettings;
 	settings.port = 8000;
 	settings.bindAddresses = ["::1", "127.0.0.1"];
