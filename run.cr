@@ -56,17 +56,20 @@ benchmarks.each_with_index do |b, i|
     sleep 1
   end
 
-  res = (0...1).map do |_|
+  res = (0...3).map do |_|
     output = IO::Memory.new
     run("bombardier", ["-c#{System.cpu_count * 50}", "-d5s", "-mPOST", %(-b{"query":"{ hello }"}), "-HContent-Type: application/json", "-ojson", "-pr", "http://localhost:8000/graphql"], wait: true, output: output)
+    sleep 1
     output.to_s
   end.last
 
   p.terminate
   r = p.wait
   if r.exit_code != 0
-    puts "command failed with exit code #{r.exit_code}"
-    exit 1
+    if r.exit_code != 143
+      puts "command failed with exit code #{r.exit_code}"
+      exit 1
+    end
   end
 
   benchmarks[i].result = JSON.parse(res.split('\n').last)["result"]
