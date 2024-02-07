@@ -2,7 +2,7 @@
   "main": "index.js",
   "dependencies": {
     "graphql": "16.8.1",
-    "hono": "2.7.8",
+    "hono": "3.12.12",
     "@honojs/graphql-server": "0.1.2"
   },
   "type": "module"
