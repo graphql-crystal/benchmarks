@@ -22,7 +22,18 @@ post "/graphql" do |env|
 
   query = Oxide::Query.from_json(env.request.body.not_nil!.gets_to_end)
 
-  Runtime.execute(query)
+  pipeline = Oxide::Validation::Pipeline.new(
+    Schema,
+    query
+  )
+
+  pipeline.execute
+
+  unless pipeline.errors.empty?
+    Runtime.execute(query)
+  else
+    pipeline.errors
+  end
 end
 
 logging false
