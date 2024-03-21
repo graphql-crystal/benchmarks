@@ -11,4 +11,4 @@
   lang: Crystal
   server: Kemal
   run:
-    cmd: crystal run --release ./oxide/main.cr
+    cmd: ./main
