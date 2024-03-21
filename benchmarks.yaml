@@ -217,3 +217,10 @@
     args:
       - start
       - ./main.graphql
+- id: oxide
+  name: Oxide
+  url: https://github.com/transparentco/oxide
+  lang: Crystal
+  server: Kemal
+  run:
+    cmd: crystal run --release ./main.cr

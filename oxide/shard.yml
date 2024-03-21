@@ -1,0 +1,9 @@
+name: oxide-example-benchmark
+version: 1.0.0
+license: MIT
+dependencies:
+  kemal:
+    github: kemalcr/kemal
+  oxide:
+    github: transparentco/oxide
+    branch: main

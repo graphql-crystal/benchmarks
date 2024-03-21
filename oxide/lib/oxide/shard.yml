@@ -1,0 +1,13 @@
+name: oxide
+version: 0.1.1
+
+authors:
+  - Gary Mardell <info@garymardell.co.uk>
+
+development_dependencies:
+  kemal:
+    github: kemalcr/kemal
+
+crystal: 1.8.0
+
+license: MIT

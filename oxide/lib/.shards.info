@@ -1,0 +1,18 @@
+---
+version: 1.0
+shards:
+  radix:
+    git: https://github.com/luislavena/radix.git
+    version: 0.4.1
+  backtracer:
+    git: https://github.com/sija/backtracer.cr.git
+    version: 1.2.2
+  exception_page:
+    git: https://github.com/crystal-loot/exception_page.git
+    version: 0.3.1
+  kemal:
+    git: https://github.com/kemalcr/kemal.git
+    version: 1.4.0
+  oxide:
+    git: https://github.com/transparentco/oxide.git
+    version: 0.1.1+git.commit.ab28c4423bae5ee46326ff4504bd4c86072dc996

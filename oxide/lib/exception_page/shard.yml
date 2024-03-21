@@ -1,0 +1,24 @@
+name: exception_page
+version: 0.3.1
+
+authors:
+  - Paul Smith <paulcsmith0218@gmail.com>
+  - Faustino Aguilar
+  - Sijawusz Pur Rahnama <sija@sija.pl>
+
+dependencies:
+  backtracer:
+    github: Sija/backtracer.cr
+    version: ~> 1.2.2
+
+development_dependencies:
+  lucky_flow:
+    github: luckyframework/lucky_flow
+    version: ~> 0.9.1
+  ameba:
+    github: crystal-ameba/ameba
+    version: ~> 1.4.3
+
+crystal: ">= 1.8.0"
+
+license: MIT

@@ -1,0 +1,9 @@
+name: radix
+version: 0.4.1
+
+authors:
+  - Luis Lavena <luislavena@gmail.com>
+
+license: MIT
+
+crystal: ">= 0.35.0"
