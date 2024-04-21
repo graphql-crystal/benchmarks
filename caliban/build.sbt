@@ -1,5 +1,5 @@
 name         := "caliban"
-scalaVersion := "3.3.1"
+scalaVersion := "3.4.1"
 
 assembly / mainClass := Some("Main")
 
@@ -10,5 +10,5 @@ assembly / assemblyMergeStrategy := {
 }
 
 libraryDependencies ++= Seq(
-  "com.github.ghostdogpr" %% "caliban-quick" % "2.4.3"
+  "com.github.ghostdogpr" %% "caliban-quick" % "2.6.0"
 )
