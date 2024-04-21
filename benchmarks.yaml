@@ -94,13 +94,13 @@
   run:
     cmd: node
     args: ["index.js"]
-- id: nim-graphql
-  name: nim-graphql
-  url: https://github.com/status-im/nim-graphql
-  lang: Nim
-  server: Chronos
-  run:
-    cmd: ./main
+#- id: nim-graphql
+#  name: nim-graphql
+#  url: https://github.com/status-im/nim-graphql
+#  lang: Nim
+#  server: Chronos
+#  run:
+#    cmd: ./main
 - id: graphql-ruby
   name: graphql-ruby
   url: https://github.com/rmosolgo/graphql-ruby
