@@ -94,13 +94,13 @@
   run:
     cmd: node
     args: ["index.js"]
-- id: nim-graphql
-  name: nim-graphql
-  url: https://github.com/status-im/nim-graphql
-  lang: Nim
-  server: Chronos
-  run:
-    cmd: ./main
+#- id: nim-graphql
+#  name: nim-graphql
+#  url: https://github.com/status-im/nim-graphql
+#  lang: Nim
+#  server: Chronos
+#  run:
+#    cmd: ./main
 - id: graphql-ruby
   name: graphql-ruby
   url: https://github.com/rmosolgo/graphql-ruby
@@ -217,3 +217,16 @@
     args:
       - start
       - ./main.graphql
+- id: caliban
+  name: Caliban
+  url: https://ghostdogpr.github.io/caliban/
+  lang: Scala
+  server: ZIO Http
+  run:
+    cmd: java
+    args:
+      [
+        "-Xmx4G",
+        "-jar",
+        "./target/scala-3.4.1/caliban-assembly-0.1.0-SNAPSHOT.jar",
+      ]

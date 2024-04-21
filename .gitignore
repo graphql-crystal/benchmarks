@@ -5,3 +5,5 @@ obj
 __pycache__
 .metals
 .bloop
+.idea
+.bsp
