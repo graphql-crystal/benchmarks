@@ -228,5 +228,5 @@
       [
         "-Xmx4G",
         "-jar",
-        "./target/scala-3.3.1/caliban-assembly-0.1.0-SNAPSHOT.jar",
+        "./target/scala-3.4.1/caliban-assembly-0.1.0-SNAPSHOT.jar",
       ]
