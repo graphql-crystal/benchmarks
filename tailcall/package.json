@@ -5,6 +5,6 @@
     "main": "tailcall start ./main.graphql"
   },
   "dependencies": {
-    "@tailcallhq/tailcall": "^0.16.0"
+    "@tailcallhq/tailcall": "^0.18.0"
   }
 }

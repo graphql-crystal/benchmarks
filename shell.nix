@@ -23,7 +23,7 @@ pkgs.mkShell {
     bundler
     psmisc
     nim
-    nimPackages.nimble
+    nimble
     bun
     pcre2
     crystal
@@ -37,6 +37,8 @@ pkgs.mkShell {
     rPackages.pryr
     rPackages.graphql
     rPackages.gqlr
+    ldc
+    dub
   ];
 
   shellHook = ''

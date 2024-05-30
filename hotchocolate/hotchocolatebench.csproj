@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HotChocolate.AspNetCore" Version="13.7.0" />
+    <PackageReference Include="HotChocolate.AspNetCore" Version="13.8.1" />
   </ItemGroup>
 
 </Project>
