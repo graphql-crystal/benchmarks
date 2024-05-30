@@ -3,7 +3,6 @@ FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
 
 RUN apt-get update \
   && apt-get install -y libgit2-dev xz-utils \
-  && curl -fsSL https://crystal-lang.org/install.sh | bash \
   && mkdir -p /etc/nix \
   && bash -c "printf \"sandbox = false\" > /etc/nix/nix.conf"
 

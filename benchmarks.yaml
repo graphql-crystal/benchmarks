@@ -213,7 +213,7 @@
   lang: Rust
   server: Hyper
   run:
-    cmd: tailcall
+    cmd: npm
     args:
-      - start
-      - ./main.graphql
+      - run
+      - main
