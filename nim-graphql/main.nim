@@ -2,7 +2,7 @@ import
   std/[os, strutils], chronos, chronicles,
   graphql, graphql/httpserver
 
-{.pragma: apiPragma, cdecl, gcsafe, raises: [Defect, CatchableError].}
+{.pragma: apiPragma, cdecl, gcsafe, raises: [].}
 
 proc queryHello(ud: RootRef, params: Args, parent: Node): RespResult {.apiPragma.} =
   return ok(resp("world"))

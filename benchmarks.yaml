@@ -218,13 +218,14 @@
   run:
     cmd: bun
     args: ["index.js"]
-- id: tailcall
-  name: Tailcall
-  url: https://tailcall.run/
-  lang: Rust
-  server: Hyper
-  run:
-    cmd: tailcall
-    args:
-      - start
-      - ./main.graphql
+# npm package does not have bin
+# - id: tailcall
+#   name: Tailcall
+#   url: https://tailcall.run/
+#   lang: Rust
+#   server: Hyper
+#   run:
+#     cmd: npm
+#     args:
+#       - run
+#       - main
