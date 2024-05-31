@@ -20,3 +20,4 @@ schema <- "
   )
 
 gqlr:::server(schema, log = FALSE)
+
