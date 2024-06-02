@@ -1,7 +1,7 @@
 {
   "main": "index.js",
   "dependencies": {
-    "fastify": "~4.25.0",
+    "fastify": "~4.27.0",
     "mercurius": "~13.3.0"
   },
   "type": "module"
