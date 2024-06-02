@@ -29,6 +29,7 @@ benchmarks.map do |b|
     run("mix", ["compile"], dir, true) if File.exists? dir.join("mix.exs")
     run("nimble", ["--silent", "-y", "install"], dir, true) if File.exists? dir.join("main.nimble")
     run("nimble", ["--silent", "-y", "build", "-d:release", "-d:chronicles_log_level=WARN"], dir, true) if File.exists? dir.join("main.nimble")
+    run("dub", ["--quiet", "build", "-b=release"], dir, true) if File.exists? dir.join("dub.json")
     ch.send(nil)
   rescue ex
     puts ex.message
@@ -58,6 +59,7 @@ benchmarks.each_with_index do |b, i|
   res = (0...1).map do |_|
     output = IO::Memory.new
     run("bombardier", ["-c#{System.cpu_count * 50}", "-d5s", "-mPOST", %(-b{"query":"{ hello }"}), "-HContent-Type: application/json", "-ojson", "-pr", "http://localhost:8000/graphql"], wait: true, output: output)
+    sleep 1
     output.to_s
   end.last
 

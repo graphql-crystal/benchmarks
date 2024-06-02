@@ -79,6 +79,13 @@
   run:
     cmd: node
     args: ["index.js"]
+- id: graphqld
+  name: GraphqlD
+  url: https://github.com/burner/graphqld
+  lang: D
+  server: Vibe.d
+  run:
+    cmd: ./graphqld-benchmark
 - id: mercurius
   name: Mercurius
   url: https://github.com/mercurius-js/mercurius
@@ -199,12 +206,15 @@
   server: HonoJS
   run:
     cmd: bun
-    args: ["index.js"]
+    args: [ "index.js" ]
 - id: tailcall
   name: Tailcall
   url: https://tailcall.run/
   lang: Rust
   server: Hyper
   run:
-    cmd: ./run.sh
+    cmd: npm
+    args:
+    - run
+    - main
     

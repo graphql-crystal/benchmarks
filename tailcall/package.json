@@ -5,6 +5,6 @@
     "main": "./run.sh"
   },
   "dependencies": {
-    "@tailcallhq/tailcall": "^0.17.0"
+    "@tailcallhq/tailcall": "^0.85.0"
   }
 }

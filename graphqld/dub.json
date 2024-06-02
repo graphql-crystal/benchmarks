@@ -1,0 +1,13 @@
+{
+	"authors": [
+		"Sergei Giniatulin"
+	],
+	"copyright": "Copyright © 2023, Sergei Giniatulin",
+	"dependencies": {
+		"graphqld": "~>5.1.4"
+	},
+    "versions": ["VibeManualMemoryManagement", "VibeHighEventPriority","VibeDisableCommandLineParsing"],
+	"description": "GraphQL D benchmark",
+	"license": "MIT",
+	"name": "graphqld-benchmark"
+}

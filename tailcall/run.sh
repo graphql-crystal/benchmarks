@@ -12,7 +12,7 @@ for core_dir in $(find "$base_dir" -type d -name "core-*"); do
         echo "Executing $tailcall_executable"
 
         # Run the executable with the specified arguments
-        "$tailcall_executable" start ./main.graphql --log-level error
+        TC_LOG_LEVEL=error "$tailcall_executable" start ./main.graphql --log-level error
         exit 0
     fi
 done
