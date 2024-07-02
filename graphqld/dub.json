@@ -2,10 +2,15 @@
 	"authors": [
 		"Sergei Giniatulin"
 	],
-	"copyright": "Copyright © 2023, Sergei Giniatulin",
+	"copyright": "Copyright © 2024, Sergei Giniatulin",
 	"dependencies": {
-		"graphqld": "~>5.1.4"
+		"graphqld": "~>5.1.6",
+        "vibe-d:tls": "*"
 	},
+    "dflags-ldc": [ "-mcpu=native"],
+    "subConfigurations": {
+         "vibe-d:tls": "notls"
+     },
     "versions": ["VibeManualMemoryManagement", "VibeHighEventPriority","VibeDisableCommandLineParsing"],
 	"description": "GraphQL D benchmark",
 	"license": "MIT",
