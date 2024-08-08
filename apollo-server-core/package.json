@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@graphql-tools/schema": "^9.0.4",
+    "apollo-server-core": "^2.26.0"
+  },
+  "type": "module"
+}

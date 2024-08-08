@@ -218,3 +218,11 @@
 #     args:
 #       - run
 #       - main
+- id: apollo-server-core
+  name: apollo-server-core
+  url: https://github.com/apollographql/apollo-server-core
+  lang: Node.js
+  server: http
+  run:
+    cmd: node
+    args: ["index.js"]
