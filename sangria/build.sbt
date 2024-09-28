@@ -1,6 +1,6 @@
 name := "sangria"
 
-ThisBuild / scalaVersion := "2.13.14"
+ThisBuild / scalaVersion := "2.13.15"
 
 scalacOptions ++= Seq("-Ywarn-unused", "-deprecation")
 
