@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "express": "~4.19.0",
+    "express": "~4.21.0",
     "graphql": "~16.8.0",
     "graphql-helix": "~1.13.0"
   },
