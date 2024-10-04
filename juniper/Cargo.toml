@@ -7,6 +7,6 @@ edition = "2021"
 
 [dependencies]
 juniper = "0.15.9"
-juniper_actix = "0.4.0"
+juniper_actix = "0.6.0"
 actix-web = { version = "4.1.0", features = ["macros"] }
 env_logger = "0.11.3"
